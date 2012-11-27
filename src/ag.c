@@ -190,7 +190,7 @@ int main(int argc, char **argv) {
     }
 	cloneIndividual(&best, pop.i[0]);
     int fbest = fitness(best);
-	while(fitness(best) != IND_SIZE) {
+	while(fitness(best) != IND_SIZE && generation++ < MAX_GENERATIONS) {
 		int i, j = 0;
         fbest = fitness(best);
 		for(i = 0; i < popsize; i++) {
