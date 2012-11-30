@@ -39,6 +39,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <limits.h>
+#include <omp.h>
 
 /**
  * Individual struct 
@@ -60,6 +61,8 @@ typedef struct population {
 #define MAX_GENERATIONS 500
 #define TOURNAMENT 4
 #define MUTATION_PROB 0.1
+
+individual* changeIndividuals(individual* i, int origin, int destiny);
 
 /** Empty population memory allocation **/
 population* popalloc(population *pop, int popsize) {
@@ -170,6 +173,89 @@ int fitness(individual ind) {
 	return sum;
 }
 
+individual* applyTournament(population pop) {
+  individual i1 = getIndividual(pop);
+  individual i2 = getIndividual(pop);
+  individual i3 = getIndividual(pop);
+  individual i4 = getIndividual(pop);
+
+
+  individual* ret = (individual*) malloc(sizeof(individual) * 4);
+
+  *(ret) = i1;
+  *(ret + 1) = i2;
+  *(ret + 2) = i3;
+  *(ret + 3) = i4;
+
+  int i;
+  for(i = 0; i < 4; i++) {
+    printf("%d\n", fitness(*(ret + i)));
+  }
+
+  if(fitness(*(ret + 1)) < fitness(*(ret + 2))) {
+    printf("Trocando Indivíduo 1 e 2\n");
+    ret = changeIndividuals(ret, 1, 2);
+  }
+  #pragma omp parallel \
+    shared(ret)
+  {
+
+    int TID = omp_get_thread_num();
+    
+    #pragma omp barrier
+    {
+      if (TID == 0) {
+        if(fitness(*(ret)) < fitness(*(ret + 2))) {
+          printf("Trocando Indivíduo 0 e 2\n");
+          ret = changeIndividuals(ret, 0, 2);
+        }
+
+      }
+      if (TID == 1) {
+        if(fitness(*(ret + 1)) < fitness(*(ret + 3))) {
+          printf("Trocando Indivíduo 1 e 3\n");
+          ret = changeIndividuals(ret, 1, 3);
+        }      
+      }
+
+      if (TID == 0) {
+        if(fitness(*(ret)) < fitness(*(ret + 1))) {
+          printf("Trocando Indivíduo 0 e 1\n");
+          ret = changeIndividuals(ret, 0, 1);
+        }
+
+      }
+      if (TID == 1) {
+        if(fitness(*(ret + 2)) < fitness(*(ret + 3))) {
+          printf("Trocando Indivíduo 2 e 3\n");
+          ret = changeIndividuals(ret, 2, 3);
+        }      
+      }
+      printf("In parallel region - Thread ID is %d\n",TID);
+    }
+    
+  }
+
+  for(i = 0; i < 4; i++) {
+    printf("%d\n", fitness(*(ret + i)));
+  }
+
+  return NULL;
+
+}
+
+individual* changeIndividuals(individual* i, int origin, int destiny) {
+  individual temp;
+
+  temp = *(i + destiny);
+
+  *(i + destiny) = *(i + origin);
+  *(i + origin) = temp;
+
+  return i;
+
+}
+
 int main(int argc, char **argv) {
 	srand(time(NULL));
 	
@@ -189,10 +275,11 @@ int main(int argc, char **argv) {
         exit(1);
     }
 	cloneIndividual(&best, pop.i[0]);
-    int fbest = fitness(best);
+  applyTournament(pop);
+  int fbest = fitness(best);
 	while(fitness(best) != IND_SIZE && generation++ < MAX_GENERATIONS) {
 		int i, j = 0;
-        fbest = fitness(best);
+    fbest = fitness(best);
 		for(i = 0; i < popsize; i++) {
 			if(fitness(pop.i[i]) > fbest)  {                
 				cloneIndividual(&best, pop.i[0]);
