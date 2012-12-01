@@ -187,60 +187,27 @@ individual* applyTournament(population pop) {
   *(ret + 2) = i3;
   *(ret + 3) = i4;
 
-  int i;
-  for(i = 0; i < 4; i++) {
-    printf("%d\n", fitness(*(ret + i)));
+  if(fitness(*(ret)) < fitness(*(ret + 1))) {
+    ret = changeIndividuals(ret, 0, 1);
   }
 
+  if(fitness(*(ret + 2)) < fitness(*(ret + 3))) {
+    ret = changeIndividuals(ret, 2, 3);
+  } 
+
+  if(fitness(*(ret)) < fitness(*(ret + 2))) {
+    ret = changeIndividuals(ret, 0, 2);
+  }
+
+  if(fitness(*(ret + 1)) < fitness(*(ret + 3))) {
+    ret = changeIndividuals(ret, 1, 3);
+  }           
+    
   if(fitness(*(ret + 1)) < fitness(*(ret + 2))) {
-    printf("Trocando Indivíduo 1 e 2\n");
     ret = changeIndividuals(ret, 1, 2);
   }
-  #pragma omp parallel \
-    shared(ret)
-  {
 
-    int TID = omp_get_thread_num();
-    
-    #pragma omp barrier
-    {
-      if (TID == 0) {
-        if(fitness(*(ret)) < fitness(*(ret + 2))) {
-          printf("Trocando Indivíduo 0 e 2\n");
-          ret = changeIndividuals(ret, 0, 2);
-        }
-
-      }
-      if (TID == 1) {
-        if(fitness(*(ret + 1)) < fitness(*(ret + 3))) {
-          printf("Trocando Indivíduo 1 e 3\n");
-          ret = changeIndividuals(ret, 1, 3);
-        }      
-      }
-
-      if (TID == 0) {
-        if(fitness(*(ret)) < fitness(*(ret + 1))) {
-          printf("Trocando Indivíduo 0 e 1\n");
-          ret = changeIndividuals(ret, 0, 1);
-        }
-
-      }
-      if (TID == 1) {
-        if(fitness(*(ret + 2)) < fitness(*(ret + 3))) {
-          printf("Trocando Indivíduo 2 e 3\n");
-          ret = changeIndividuals(ret, 2, 3);
-        }      
-      }
-      printf("In parallel region - Thread ID is %d\n",TID);
-    }
-    
-  }
-
-  for(i = 0; i < 4; i++) {
-    printf("%d\n", fitness(*(ret + i)));
-  }
-
-  return NULL;
+  return ret;
 
 }
 
@@ -269,13 +236,13 @@ int main(int argc, char **argv) {
 		puts("Memory Error");
 		exit(1);
 	}
-    best.v = malloc(IND_SIZE * sizeof(individual));
-    if(!best.v) {
-        puts("Memory Error");
-        exit(1);
-    }
+  best.v = malloc(IND_SIZE * sizeof(individual));
+  if(!best.v) {
+      puts("Memory Error");
+      exit(1);
+  }
+
 	cloneIndividual(&best, pop.i[0]);
-  applyTournament(pop);
   int fbest = fitness(best);
 	while(fitness(best) != IND_SIZE && generation++ < MAX_GENERATIONS) {
 		int i, j = 0;
@@ -294,27 +261,34 @@ int main(int argc, char **argv) {
 		
 		for(i = 0; i < breed; i++) {
 			individual c1, c2;
-			applyCrossover(
-				&c1, &c2, popsize,
-				getIndividual(pop), 
-				getIndividual(pop)
-			);
-            mutate(&c1);
-            mutate(&c2);
+      individual* tournament = applyTournament(pop);
+
+      printIndividual(*(tournament));
+      printIndividual(*(tournament + 1));
+      printIndividual(*(tournament + 2));
+      printIndividual(*(tournament + 3));
+      
+			applyCrossover(&c1, &c2, popsize, *tournament, *(tournament + 1));
+      mutate(&c1);
+      mutate(&c2);
 
 			cloneIndividual(&q.i[j++], c1);
 			cloneIndividual(&q.i[j++], c2);
-            free(c1.v); free(c2.v);
+      free(c1.v); free(c2.v);  
 
+      free((*(tournament)).v);
+      free((*(tournament + 1)).v);
+      free((*(tournament + 2)).v);
+      free((*(tournament + 3)).v);
 		}
-        popfree(&pop, popsize);
+    popfree(&pop, popsize);
 		pop = q;
 	} 
 	
-    printf("best single individuo: ");
-    printIndividual(best);
+  printf("best single individuo: ");
+  printIndividual(best);
 	printf("\nfitness: %d\n", fitness(best));
-    printf("generation: %d\n", generation-1);
+  printf("generation: %d\n", generation-1);
 	return 0;
 }
 
