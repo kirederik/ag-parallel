@@ -39,6 +39,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <limits.h>
+#include <omp.h>
 
 /**
  * Individual struct 
@@ -60,6 +61,8 @@ typedef struct population {
 #define MAX_GENERATIONS 500
 #define TOURNAMENT 4
 #define MUTATION_PROB 0.1
+
+individual* changeIndividuals(individual* i, int origin, int destiny);
 
 /** Empty population memory allocation **/
 population* popalloc(population *pop, int popsize) {
@@ -99,8 +102,9 @@ population* initialize(population *pop, int popsize) {
 
 /** Return a random individual **/
 individual getIndividual(population p) {
-	int index = rand() % MAX_POP_SIZE;
-	return p.i[index];
+	int a = rand();
+  int index = a % MAX_POP_SIZE;
+  return p.i[index];
 }
 
 void printIndividual(individual p) {
@@ -111,23 +115,21 @@ void printIndividual(individual p) {
     return;
 }
 
-void applyCrossover(
-		individual *c1, individual *c2, int popsize,
-		individual p1, individual p2
-	) {
+void applyCrossover(individual *c1, individual *c2, int popsize, individual p1, individual p2) {
 	int cindex = rand() % IND_SIZE;
 	individual *x, *y;
 	int i;
 	x = &p1;
 	y = &p2;
     
-    c1->v = malloc(IND_SIZE * sizeof(int));
-    c2->v = malloc(IND_SIZE * sizeof(int));
+  c1->v = (int *) malloc(IND_SIZE * sizeof(int));
+  c2->v = (int *) malloc(IND_SIZE * sizeof(int));
 	if(!c1->v || !c2->v) {
-        puts("Memory Error");
-        exit(1);
-    }
-	for(i = 0; i < popsize; i++) {
+    puts("Memory Error");
+    exit(1);
+  }
+
+	for(i = 0; i < IND_SIZE; i++) {
 		if(i == cindex) {
 			x = &p2;
 			y = &p1;
@@ -170,6 +172,68 @@ int fitness(individual ind) {
 	return sum;
 }
 
+individual* applyTournament(population pop) {
+  individual i1 = getIndividual(pop);
+  individual i2 = getIndividual(pop);
+  individual i3 = getIndividual(pop);
+  individual i4 = getIndividual(pop);
+
+  printIndividual(i1);
+  printf("\n");
+  printIndividual(i2);
+  printf("\n");
+  printIndividual(i3);
+  printf("\n");
+  printIndividual(i4);
+  printf("\n");
+
+  individual* ret = (individual*) malloc(sizeof(individual) * 4);
+
+  *(ret) = i1;
+  *(ret + 1) = i2;
+  *(ret + 2) = i3;
+  *(ret + 3) = i4;
+
+  printf("%d %d %d %d\n", fitness(*ret), fitness(*(ret + 1)), fitness(*(ret + 2)), fitness(*(ret + 3))); 
+  
+  if(fitness(*(ret)) < fitness(*(ret + 1))) {
+    ret = changeIndividuals(ret, 0, 1);
+  }
+
+  if(fitness(*(ret + 2)) < fitness(*(ret + 3))) {
+    ret = changeIndividuals(ret, 2, 3);
+  } 
+
+  if(fitness(*(ret)) < fitness(*(ret + 2))) {
+    ret = changeIndividuals(ret, 0, 2);
+  }
+
+  if(fitness(*(ret + 1)) < fitness(*(ret + 3))) {
+    ret = changeIndividuals(ret, 1, 3);
+  }           
+    
+  if(fitness(*(ret + 1)) < fitness(*(ret + 2))) {
+    ret = changeIndividuals(ret, 1, 2);
+  }
+
+  printf("%d %d %d %d\n", fitness(*ret), fitness(*(ret + 1)), fitness(*(ret + 2)), fitness(*(ret + 3))); 
+
+  return ret;
+
+}
+
+individual* changeIndividuals(individual* i, int origin, int destiny) {
+  individual temp;
+
+  temp = *(i + destiny);
+
+  *(i + destiny) = *(i + origin);
+  *(i + origin) = temp;
+
+  return i;
+
+}
+
 int main(int argc, char **argv) {
 	srand(time(NULL));
 	
@@ -183,21 +247,17 @@ int main(int argc, char **argv) {
 		puts("Memory Error");
 		exit(1);
 	}
-    best.v = malloc(IND_SIZE * sizeof(individual));
-    if(!best.v) {
-        puts("Memory Error");
-        exit(1);
-    }
+  best.v = malloc(IND_SIZE * sizeof(individual));
+  if(!best.v) {
+      puts("Memory Error");
+      exit(1);
+  }
+
 	cloneIndividual(&best, pop.i[0]);
-    int fbest = fitness(best);
+  int fbest = fitness(best);
+  int best_generation = generation;
 	while(fitness(best) != IND_SIZE && generation++ < MAX_GENERATIONS) {
 		int i, j = 0;
-        fbest = fitness(best);
-		for(i = 0; i < popsize; i++) {
-			if(fitness(pop.i[i]) > fbest)  {                
-				cloneIndividual(&best, pop.i[0]);
-			}
-		}
 		
 		population q;
 		if(!popalloc(&q, popsize)) {
@@ -207,27 +267,39 @@ int main(int argc, char **argv) {
 		
 		for(i = 0; i < breed; i++) {
 			individual c1, c2;
-			applyCrossover(
-				&c1, &c2, popsize,
-				getIndividual(pop), 
-				getIndividual(pop)
-			);
-            mutate(&c1);
-            mutate(&c2);
+      individual* tournament = applyTournament(pop);
+
+//      printf("%d\n", fitness(*(tournament)));
+//      printf("%d\n", fitness(*(tournament + 1)));
+			
+      applyCrossover(&c1, &c2, popsize, *tournament, best);
+      mutate(&c1);
+      mutate(&c2);
 
 			cloneIndividual(&q.i[j++], c1);
 			cloneIndividual(&q.i[j++], c2);
-            free(c1.v); free(c2.v);
+      free(c1.v); free(c2.v);  
+      free(tournament);
 
 		}
-        popfree(&pop, popsize);
+    popfree(&pop, popsize);
 		pop = q;
+		
+    for(i = 0; i < popsize; i++) {
+		  if(fitness(pop.i[i]) > fbest)  {                
+			  cloneIndividual(&best, pop.i[0]);
+        fbest = fitness(best);
+        best_generation = generation;
+  		}
+	  }
+
 	} 
 	
-    printf("best single individuo: ");
-    printIndividual(best);
+  printf("best single individuo: ");
+  printIndividual(best);
 	printf("\nfitness: %d\n", fitness(best));
-    printf("generation: %d\n", generation-1);
+  printf("generation: %d\n", generation-1);
+  printf("generation of best ind: %d\n", best_generation);
 	return 0;
 }
 
