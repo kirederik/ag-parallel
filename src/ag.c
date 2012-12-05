@@ -178,16 +178,6 @@ individual* applyTournament(population pop) {
   individual i3 = getIndividual(pop);
   individual i4 = getIndividual(pop);
 
-  printIndividual(i1);
-  printf("\n");
-  printIndividual(i2);
-  printf("\n");
-  printIndividual(i3);
-  printf("\n");
-  printIndividual(i4);
-  printf("\n");
-
-
   individual* ret = (individual*) malloc(sizeof(individual) * 4);
 
   *(ret) = i1;
@@ -196,8 +186,6 @@ individual* applyTournament(population pop) {
   *(ret + 3) = i4;
 
 
-  printf("%d %d %d %d\n", fitness(*ret), fitness(*(ret + 1)), fitness(*(ret + 2)), fitness(*(ret + 3))); 
-  
   if(fitness(*(ret)) < fitness(*(ret + 1))) {
     ret = changeIndividuals(ret, 0, 1);
   }
@@ -218,8 +206,6 @@ individual* applyTournament(population pop) {
     ret = changeIndividuals(ret, 1, 2);
   }
 
-
-  printf("%d %d %d %d\n", fitness(*ret), fitness(*(ret + 1)), fitness(*(ret + 2)), fitness(*(ret + 3))); 
 
   return ret;
 
@@ -271,20 +257,23 @@ int main(int argc, char **argv) {
 		for(i = 0; i < breed; i++) {
 			individual c1, c2;
       individual* tournament = applyTournament(pop);
-
-
-//      printf("%d\n", fitness(*(tournament)));
-//      printf("%d\n", fitness(*(tournament + 1)));
 			
-      applyCrossover(&c1, &c2, popsize, *tournament, best);
+      //Crossover of the two best of tournament
+      applyCrossover(&c1, &c2, popsize, *tournament, *(tournament + 1));
 
-      printIndividual(*(tournament));
-      printIndividual(*(tournament + 1));
-      printIndividual(*(tournament + 2));
-      printIndividual(*(tournament + 3));
-      
+      //Mutate with the probability above
       mutate(&c1);
       mutate(&c2);
+
+      //if the fitness of generated individual is worse than individual of tournament do not put this in the population
+      if (fitness(*tournament) > fitness(c1)) {
+        cloneIndividual(&c1, *tournament);
+      }
+
+      //if the fitness of generated individual is worse than individual of tournament do not put this in the population
+      if (fitness(*(tournament + 1)) > fitness(c2)) {
+        cloneIndividual(&c2, *(tournament + 1));
+      }
 
 			cloneIndividual(&q.i[j++], c1);
 			cloneIndividual(&q.i[j++], c2);
@@ -294,7 +283,8 @@ int main(int argc, char **argv) {
 
     popfree(&pop, popsize);
 		pop = q;
-		
+
+    //verify if was generated a better individual	than in the previous population
     for(i = 0; i < popsize; i++) {
 		  if(fitness(pop.i[i]) > fbest)  {                
 			  cloneIndividual(&best, pop.i[0]);
@@ -305,7 +295,7 @@ int main(int argc, char **argv) {
 
 	} 
 	
-  printf("best single individuo: ");
+  printf("best single individual: ");
   printIndividual(best);
 	printf("\nfitness: %d\n", fitness(best));
   printf("generation: %d\n", generation-1);
