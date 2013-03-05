@@ -1,0 +1,25 @@
+\begin{thebibliography}{}
+
+\bibitem[Alba and Troya 1999]{albasurvey}
+Alba, E. and Troya, J.~M. (1999).
+\newblock A survey of parallel distributed genetic algorithms.
+\newblock {\em Complex.}, 4(4):31--52.
+
+\bibitem[Goldberg 1989]{goldberg1989}
+Goldberg, D. (1989).
+\newblock {\em Genetic algorithms in search, optimization, and machine
+  learning}.
+\newblock Artificial Intelligence. Addison-Wesley.
+
+\bibitem[Herrera et~al. 1998]{herrera1998}
+Herrera, F., Lozano, M., and Verdegay, J.~L. (1998).
+\newblock Tackling real-coded genetic algorithms: Operators and tools for
+  behavioural analysis.
+\newblock {\em Artif. Intell. Rev.}, 12(4):265--319.
+
+\bibitem[Nowostawski and Poli 1999]{paraleltax}
+Nowostawski, M. and Poli, R. (1999).
+\newblock Parallel genetic algorithm taxonomy.
+\newblock In {\em Proceedings of the Third International}, pages 88--92. IEEE.
+
+\end{thebibliography}

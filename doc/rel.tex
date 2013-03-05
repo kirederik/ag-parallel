@@ -1,0 +1,62 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+
+\usepackage{graphicx,url}
+
+\usepackage[brazil]{babel}   
+\usepackage[utf8]{inputenc}  
+
+     
+\sloppy
+
+\title{Algoritmo Genéticos Paralelo: uma abordagem hierárquica}
+
+\author{Derik Evangelista Rodrigues da Silva\inst{1}, Raphael Henrique Ferreira de Andrade\inst{1}, \\Eduardo Spinosa\inst{1}}
+
+\address{Departamento de Informática -- Universidade Federal do Paraná
+  (UFPR)\\
+  Caixa Postal 19081 -- 81531-980 -- Curitiba -- PR -- Brasil
+  \email{\{dersilva, rhfandrade, spinosa\}@inf.ufpr.br}
+}
+
+\begin{document} 
+
+\maketitle
+
+\begin{abstract}
+  @TODO Abstract
+\end{abstract}
+     
+\begin{resumo} 
+  @TODO Resumo
+\end{resumo}
+
+
+\section{Introdução}
+
+% O Algoritmo Genético (GA), frequentemente referenciado como \emph{algoritmos genéticos}, foi desenvolvido por John Holland na Universidade de Michigan, nos anos 70 (\cite{luke2009}).
+
+Algoritmo Genetico (\emph{Genetic Algorithm} -- GA) são algoritmos de busca inspirados no processo de evolução e seleção natural \cite{goldberg1989} e tem tido grande sucesso em problemas de busca e de otimização, principalmente quando o espaços de busca é grande, complexo ou pouco conhecido, onde métodos de buscas convencionais (enumerativos, heurísticos, ...) não são apropriados \cite{herrera1998}. 
+
+Um GA sequencial inicia-se gerando um conjunto de indivíduos para formar uma população inicial. Cada indivíduo representa uma possível solução do problema. Usando uma função de avaliação (chamada de função \emph{fitness}), mede-se a qualidade de cada indivíduo desta população. O cálculo do \emph{fitness} é, geralmente, o processo mais custoso de um GA \cite{paraleltax}. Seleciona-se aleatoriamente, então, um subconjunto de indivíduos desta população e neste é aplicado operadores estocásticos de seleção, mutação e cruzamento. Por fim, os indivíduos menos adaptados (ou seja, com pior \emph{fitness}) são descartados, para dar lugar a indivíduos mais bem adaptados.
+
+% @TODO Colocar exemplos de sucesso!
+Apesar do sucesso em muitas aplicações em diferentes domínios, existem, de acordo com \cite{paraleltax}, algums problemas que podem ser resolvidos com o uso de um Algoritmo Genético Paralelo (\emph{Parallel GA} -- PGA):
+
+\begin{itemize}
+  \item Para alguns tipos de problemas, o tamanho da população precisa ser muito grande, requerendo, consequentemente, uma grande quantidade de memória, podendo impossibilitar a execução eficiente em uma única máquina.
+  \item O cálculo do \emph{fitness} consome muito tempo. Há registros na literatura de uma única execução consumindo mais de 1 ano de CPU.
+  \item GA's sequencias podem ficar presos em regiões sub-ótimas, ficando impossibilitados de encontrar uma melhor solução. PGA's podem buscar em multiplos subespaços de busca em paralelo, e tem menos chance de ficar preso em regiões sub-ótimas.
+\end{itemize}
+
+O motivo mais importante para se estudar PGAs, ainda segundo \cite{paraleltax}, é que em muitos casos eles tem uma melhor performance do que os sequenciais, mesmo quando o paralelismo é simulado em uma máquina convencional. Segundo \cite{albasurvey}, eles atingem o objetivo ideal de se construir um algoritmo paralelo, onde o todo é melhor do que a soma das partes.
+
+Este trabalho tem como objetivo comparar três tipos de arquiteturas de PGAs: múltiplas populações, arquitetura mestre-escravo e um híbrido de ambas, ou seja, uma combinação de múltiplas populaçõoes com mestre-escravo, aplicadas a otimização de funções. Além disso, compararemos os resultados com um GA sequencial convencional.
+
+
+
+\bibliographystyle{sbc}
+\bibliography{rel}
+
+\end{document}
