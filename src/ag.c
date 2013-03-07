@@ -45,7 +45,7 @@
  * Individual struct 
  */
 typedef struct individual {
-	int *v;
+	double *v;
 } individual;
 
 /**
@@ -56,8 +56,8 @@ typedef struct population {
 } population;
 
 /** Define initial parameters **/
-#define MAX_POP_SIZE 100
-#define IND_SIZE 10
+#define MAX_POP_SIZE 10
+#define IND_SIZE 5
 #define MAX_GENERATIONS 500
 #define TOURNAMENT 4
 #define MUTATION_PROB 0.1
@@ -69,12 +69,19 @@ population* popalloc(population *pop, int popsize) {
 	int i;
 	if((pop->i = malloc(popsize * sizeof(individual)))) {
 		for(i = 0; i < popsize; i++) {
-			if(!(pop->i[i].v = malloc(IND_SIZE * sizeof(int)))) {
+			if(!(pop->i[i].v = malloc(IND_SIZE * sizeof(double)))) {
 				break;
 			}
 		}
 	}
 	return pop;
+}
+
+double range_rand(double max, double min) {
+	
+	double  out = ((double)rand()/ (RAND_MAX)) * (max - min) + min;
+	
+	return out;
 }
 
 /** Free a population **/
@@ -93,9 +100,12 @@ population* initialize(population *pop, int popsize) {
 	if(popalloc(pop, popsize)) {
 		for(i = 0; i< popsize; i++) {
 			int j;
-			for(j = 0; j < IND_SIZE; j++)
-				pop->i[i].v[j] = rand() % 2;
+			for(j = 0; j < IND_SIZE; j++){
+				pop->i[i].v[j] = range_rand(5.12, -5.12);
+				printf("%.5lf ", pop->i[i].v[j]);}
+				puts("");
 		}
+		
 	}
 	return pop;
 }
@@ -109,10 +119,10 @@ individual getIndividual(population p) {
 
 void printIndividual(individual p) {
     int i;
-    for(i = 0; i < IND_SIZE; i++) {
-		printf("%d ", p.v[i]);
+	for(i = 0; i < IND_SIZE; i++) {
+		printf("%.5lf ", p.v[i]);
 	}
-    return;
+	return;
 }
 
 void applyCrossover(individual *c1, individual *c2, int popsize, individual p1, individual p2) {
@@ -122,8 +132,8 @@ void applyCrossover(individual *c1, individual *c2, int popsize, individual p1, 
 	x = &p1;
 	y = &p2;
     
-  c1->v = (int *) malloc(IND_SIZE * sizeof(int));
-  c2->v = (int *) malloc(IND_SIZE * sizeof(int));
+  c1->v = (double *) malloc(IND_SIZE * sizeof(double));
+  c2->v = (double *) malloc(IND_SIZE * sizeof(double));
 	if(!c1->v || !c2->v) {
     puts("Memory Error");
     exit(1);
@@ -155,22 +165,39 @@ void mutate(individual *ind) {
     for(i = 0; i < IND_SIZE; i++) {
         double prob = (rand() % 100) / 100;
         if (prob < MUTATION_PROB) {
-            ind->v[i] = (ind->v[i] == 0) ? 1 : 0;
+					double mut = range_rand(0.5 , -0.5);
+					printf("%.7lf ", mut);
+					ind->v[i] = ind->v[i] + mut;
         }
     }
+    puts("");
 
     return;
 }
 
 /** Apply the fitness function **/
-int fitness(individual ind) {
+double fitness(individual ind) {
 	int i;
-	int sum = 0;
+	double sum = 0;
 	for(i = 0; i < IND_SIZE; i++) {
-		sum += ind.v[i];
+		sum += ind.v[i] * ind.v[i]; //f(x) = sum(x^2)
 	}
 	return sum;
 }
+
+int is_best(individual i, individual candidate) {
+	double ind = fitness(i);
+	double cand = fitness(candidate);
+	
+	ind = (ind < 0)?-1 * ind:ind;
+	cand = (cand < 0)?-1 * cand:cand;
+	
+	if (cand < ind) {
+		return 1;
+	} else {
+		return 0;
+	}
+} 
 
 individual* applyTournament(population pop) {
   individual i1 = getIndividual(pop);
@@ -186,23 +213,23 @@ individual* applyTournament(population pop) {
   *(ret + 3) = i4;
 
 
-  if(fitness(*(ret)) < fitness(*(ret + 1))) {
+  if(is_best(*(ret),*(ret + 1))) {
     ret = changeIndividuals(ret, 0, 1);
   }
 
-  if(fitness(*(ret + 2)) < fitness(*(ret + 3))) {
+  if(is_best(*(ret + 2),*(ret + 3))) {
     ret = changeIndividuals(ret, 2, 3);
   } 
 
-  if(fitness(*(ret)) < fitness(*(ret + 2))) {
+  if(is_best(*(ret),*(ret + 2))) {
     ret = changeIndividuals(ret, 0, 2);
   }
 
-  if(fitness(*(ret + 1)) < fitness(*(ret + 3))) {
+  if(is_best(*(ret + 1),*(ret + 3))) {
     ret = changeIndividuals(ret, 1, 3);
   }           
     
-  if(fitness(*(ret + 1)) < fitness(*(ret + 2))) {
+  if(is_best(*(ret + 1), *(ret + 2))) {
     ret = changeIndividuals(ret, 1, 2);
   }
 
@@ -243,7 +270,7 @@ int main(int argc, char **argv) {
   }
 
 	cloneIndividual(&best, pop.i[0]);
-  int fbest = fitness(best);
+  double fbest = fitness(best);
 
   int best_generation = generation;
 	while(fitness(best) != IND_SIZE && generation++ < MAX_GENERATIONS) {
@@ -286,7 +313,7 @@ int main(int argc, char **argv) {
 
     //verify if was generated a better individual	than in the previous population
     for(i = 0; i < popsize; i++) {
-		  if(fitness(pop.i[i]) > fbest)  {                
+		  if(is_best(pop.i[i], best))  {                
 			  cloneIndividual(&best, pop.i[0]);
         fbest = fitness(best);
         best_generation = generation;
@@ -297,7 +324,7 @@ int main(int argc, char **argv) {
 	
   printf("best single individual: ");
   printIndividual(best);
-	printf("\nfitness: %d\n", fitness(best));
+	printf("\nfitness: %.6lf\n", fitness(best));
   printf("generation: %d\n", generation-1);
   printf("generation of best ind: %d\n", best_generation);
 
