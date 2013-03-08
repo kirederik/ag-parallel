@@ -56,9 +56,9 @@ typedef struct population {
 } population;
 
 /** Define initial parameters **/
-#define MAX_POP_SIZE 10
+#define MAX_POP_SIZE 200
 #define IND_SIZE 6
-#define MAX_GENERATIONS 500
+#define MAX_GENERATIONS 1000
 #define TOURNAMENT 4
 #define MUTATION_PROB 0.1
 
@@ -270,7 +270,7 @@ int main(int argc, char **argv) {
   double fbest = fitness(best);
 
   int best_generation = generation;
-	while(fitness(best) != IND_SIZE && generation++ < MAX_GENERATIONS) {
+	while(generation++ < MAX_GENERATIONS) {
 		int i, j = 0;		
 		population q;
 		if(!popalloc(&q, popsize)) {
@@ -313,7 +313,7 @@ int main(int argc, char **argv) {
 
     //verify if was generated a better individual	than in the previous population
     for(i = 0; i < popsize; i++) {
-		  if(is_best(pop.i[i], best))  {                
+		  if(is_best(best, pop.i[i]))  {                
 			  cloneIndividual(&best, pop.i[0]);
         fbest = fitness(best);
         best_generation = generation;
