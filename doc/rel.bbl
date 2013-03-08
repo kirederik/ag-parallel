@@ -5,6 +5,20 @@ Alba, E. and Troya, J.~M. (1999).
 \newblock A survey of parallel distributed genetic algorithms.
 \newblock {\em Complex.}, 4(4):31--52.
 
+\bibitem[Bersini and Renders 1994]{bersing1994}
+Bersini, H. and Renders, J.-M. (1994).
+\newblock Hybridizing genetic algorithms with hill-climbing methods for global
+  optimization: Two possible ways.
+\newblock In {\em International Conference on Evolutionary Computation}, pages
+  312--317.
+
+\bibitem[De~Jong 1975]{dejong1975}
+De~Jong, K.~A. (1975).
+\newblock {\em An analysis of the behavior of a class of genetic adaptive
+  systems.}
+\newblock PhD thesis, Ann Arbor, MI, USA.
+\newblock AAI7609381.
+
 \bibitem[Goldberg 1989]{goldberg1989}
 Goldberg, D. (1989).
 \newblock {\em Genetic algorithms in search, optimization, and machine
@@ -17,9 +31,51 @@ Herrera, F., Lozano, M., and Verdegay, J.~L. (1998).
   behavioural analysis.
 \newblock {\em Artif. Intell. Rev.}, 12(4):265--319.
 
+\bibitem[Holland 1975]{holland1975}
+Holland, J. (1975).
+\newblock {\em Adaptation in natural and artificial systems: an introductory
+  analysis with applications to biology, control, and artificial intelligence}.
+\newblock University of Michigan Press.
+
+\bibitem[Katare et~al. 2004]{katare2000}
+Katare, S., Bhan, A., Caruthers, J.~M., Delgass, W.~N., and Venkatasubramanian,
+  V. (2004).
+\newblock A hybrid genetic algorithm for efficient parameter estimation of
+  large kinetic models.
+\newblock {\em Computers \& Chemical Engineering}, 28(12):2569 -- 2581.
+
+\bibitem[Luke 2009]{luke2009}
+Luke, S. (2009).
+\newblock {\em Essentials of Metaheuristics}.
+\newblock Lulu.
+\newblock Disponível em:
+  $<$http://cs.gmu.edu/$\sim$sean/book/metaheuristics/$>$. Acesso em:
+  27/02/2013.
+
+\bibitem[Michell 1998]{geintro1998}
+Michell, M. (1998).
+\newblock {\em An Introduction to Genetic Algorithms}.
+\newblock Complex Adaptive Systems Series. Mit Press.
+
 \bibitem[Nowostawski and Poli 1999]{paraleltax}
 Nowostawski, M. and Poli, R. (1999).
 \newblock Parallel genetic algorithm taxonomy.
 \newblock In {\em Proceedings of the Third International}, pages 88--92. IEEE.
+
+\bibitem[Srinivas and Patnaik June]{gasurvey}
+Srinivas, M. and Patnaik, L. (June).
+\newblock Genetic algorithms: a survey.
+\newblock {\em Computer}, 27(6):17--26.
+
+\bibitem[Whitley et~al. 1988]{whitley1988}
+Whitley, D., Kauth, J., and of~Computer~Science, C. S. U.~D. (1988).
+\newblock {\em GENITOR: A Different Genetic Algorithm}.
+\newblock Technical report (Colorado State University. Dept. of Computer
+  Science). Colorado State University, Department of Computer Science.
+
+\bibitem[Yang 2002]{yang2002}
+Yang, S. (2002).
+\newblock Genetic algorithms based on primal-dual chromosomes for royal road
+  functions.
 
 \end{thebibliography}

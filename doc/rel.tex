@@ -3,10 +3,11 @@
 \usepackage{sbc-template}
 
 \usepackage{graphicx,url}
-
+\usepackage[algoruled,longend]{algorithm2e}
 \usepackage[brazil]{babel}   
 \usepackage[utf8]{inputenc}  
-
+\usepackage{enumitem}
+\setdescription{leftmargin=\parindent,labelindent=\parindent}
      
 \sloppy
 
@@ -60,9 +61,38 @@ Este trabalho tem como objetivo comparar três tipos de arquiteturas de PGAs: m�
 %Algoritmo Genetico: Origem, funcionamento, usos comuns
 %AG Paralelo: concepcao, hierarquias, 
 
-O Algoritmo Genético (usualmente referido como algoritmos genéticos) foi desenvolvido por John Holland na Universidade do Michigan, em 1970 \cite{holland75} e apresenta uma alternativa as técnicas clássicas de otimização, usando buscas aleatórias dirigidas para localizar soluções ótimas em espaços de buscas complexos \cite{gasurvey}.
+O Algoritmo Genético foi desenvolvido por John Holland na Universidade de Michigan, em 1970 \cite{holland1975}, inspirado no processo de seleção natural e evolução, e apresenta uma alternativa as técnicas clássicas de otimização, usando buscas aleatórias dirigidas para localizar soluções ótimas em espaços de buscas complexos \cite{gasurvey}. O objetivo original de Holland não era construir um algoritmo que resolvesse um problema específico, mas formalizar o estudo do fenômeno de adaptação da mesma forma que este acontece na natureza e desenvolver mecanismos de importar este comportamento em sistemas computacionais \cite{geintro1998}.
 
+Tendo sua inspiração na biologia, alguns termos desta área são usados para descrever o GA \cite{luke2009}:
+\begin{description}
+	\item [Indivíduo] Solução candidata;
+	\item [População] Conjunto de indivíduos;
+	\item [Filhos e Pais] Um filho é uma cópia perturbada de seu pai (ambos são indivíduos);
+	\item [\emph{Fitness} (Adaptabilidade)] Medida de qualidade de dada solução; 
+	\item [Função de \emph{Fitness}] Função de qualidade. 
+  \item [Seleção] Escolha de indivíduos, baseado em seu \emph{fitness};
+  \item [Mutação] Pequena perturbação na solução;
+  \item [Recombinação / Cruzamento] Grande perturbação na estrutura do indivíduo. Geralmente gera dois filhos recombinando a estrutura de seus pais.
+  \item [Genoma / Genótipo] Estrutura do indivíduo;
+  \item [Geração] População gerada em cada ciclo do algoritmo, que envolve as funções e transformações previamente definidas.
+ \end{description}
 
+O algoritmo apresentado em \cite{holland1975} é usualmente chamado de canônico \cite{yang2002} ou Algoritmo Genético Simples (SGA)\cite{gasurvey} e trabalha, essencialmente, com indivíduos sendo um vetor de bits, ou seja, a solução é codificada em termos de 0 e 1. Como método de seleção, o SGA usa o esquema de \emph{roleta}, onde um determinado indivíduo tem mais chance de ser escolhido para procriar dependendo de seu \emph{fitness}
+ calculado.
+
+Algumas variações foram apresentadas, como a inclusão de elitismo \cite{dejong1975}, que consiste em manter um número de indivíduos com melhor \emph{fitness} de uma geração para outra, o \emph{Steady-State Genetic Algorithm} \cite{whitley1988}, que atualiza a população assim que os filhos são gerados, descartando-os ou inserindo-os no lugar de alguns de indivíduos piores da população e o \emph{Tree-Style Genetic Programming Pipeline}, que utiliza uma forma diferente de procriação: com 90\% de probabilidade, dois pais serão selecionados e será efetuado o cruzamento convencional e, por outro lado, com 10\% de probabilidade, será selecionado apenas um pai, que será copiado para a nova população. Existem versões, também, que se preocupam em adaptar as taxas de cruzamento e mutação em tempo de execução e abordagens híbridas, como efetuar uma busca local em cada indivíduo, usando outro algoritmo \cite{bersing1994} \cite{katare2000}.
+
+@TODO REVISÃO AG PARALELO: HIERARQUIAS
+
+\section{Avaliação Experimental}
+
+Esboço: Comparação entre ag tradicional, ag paralelo com multiplas populações, ag paralelo master slave e ag hibrido das duas anteriores.
+
+Problema: funções de de jong.
+
+Modelagem: Vetor de números reais. Cruzamento convencional. Mutação: pequena soma/subtração de número entre 0.01 e 0.05. Seleção torneio.
+
+Análise: tabelas: tempo gasto, resultado médio em 10 execuções para cada um dos ag's, ótimo conhecido. Gráfico: fitness x geração, testes: kruskal-wallis e/ou analise de covariancia (ancova).
 
 \bibliographystyle{sbc}
 \bibliography{rel}
