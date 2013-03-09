@@ -1,5 +1,11 @@
 \begin{thebibliography}{}
 
+\bibitem[Adamidis and Petridis May]{adamidis1996}
+Adamidis, P. and Petridis, V. (May).
+\newblock Co-operating populations with different evolution behaviours.
+\newblock In {\em Evolutionary Computation, 1996., Proceedings of IEEE
+  International Conference on}, pages 188--191.
+
 \bibitem[Alba and Troya 1999]{albasurvey}
 Alba, E. and Troya, J.~M. (1999).
 \newblock A survey of parallel distributed genetic algorithms.
@@ -11,6 +17,11 @@ Bersini, H. and Renders, J.-M. (1994).
   optimization: Two possible ways.
 \newblock In {\em International Conference on Evolutionary Computation}, pages
   312--317.
+
+\bibitem[Cantú-Paz 1998]{cantu1998}
+Cantú-Paz, E. (1998).
+\newblock A survey of parallel genetic algorithms.
+\newblock {\em CALCULATEURS PARALLELES}, 10.
 
 \bibitem[De~Jong 1975]{dejong1975}
 De~Jong, K.~A. (1975).
@@ -25,6 +36,13 @@ Goldberg, D. (1989).
   learning}.
 \newblock Artificial Intelligence. Addison-Wesley.
 
+\bibitem[Gorges-Schleuter 1989]{asparagos1989}
+Gorges-Schleuter, M. (1989).
+\newblock Asparagos an asynchronous parallel genetic optimization strategy.
+\newblock In {\em Proceedings of the third international conference on Genetic
+  algorithms}, pages 422--427, San Francisco, CA, USA. Morgan Kaufmann
+  Publishers Inc.
+
 \bibitem[Herrera et~al. 1998]{herrera1998}
 Herrera, F., Lozano, M., and Verdegay, J.~L. (1998).
 \newblock Tackling real-coded genetic algorithms: Operators and tools for
@@ -36,6 +54,12 @@ Holland, J. (1975).
 \newblock {\em Adaptation in natural and artificial systems: an introductory
   analysis with applications to biology, control, and artificial intelligence}.
 \newblock University of Michigan Press.
+
+\bibitem[H{\o}verstad 2010]{hoverstad2010}
+H{\o}verstad, B.~A. (2010).
+\newblock Simdist: a distribution system for easy parallelization of
+  evolutionary computation.
+\newblock {\em Genetic Programming and Evolvable Machines}, 11(2):185--203.
 
 \bibitem[Katare et~al. 2004]{katare2000}
 Katare, S., Bhan, A., Caruthers, J.~M., Delgass, W.~N., and Venkatasubramanian,
@@ -66,6 +90,13 @@ Nowostawski, M. and Poli, R. (1999).
 Srinivas, M. and Patnaik, L. (June).
 \newblock Genetic algorithms: a survey.
 \newblock {\em Computer}, 27(6):17--26.
+
+\bibitem[Tanese 1989]{tanese1989}
+Tanese, R. (1989).
+\newblock Distributed genetic algorithms.
+\newblock In {\em Proceedings of the 3rd International Conference on Genetic
+  Algorithms}, pages 434--439, San Francisco, CA, USA. Morgan Kaufmann
+  Publishers Inc.
 
 \bibitem[Whitley et~al. 1988]{whitley1988}
 Whitley, D., Kauth, J., and of~Computer~Science, C. S. U.~D. (1988).

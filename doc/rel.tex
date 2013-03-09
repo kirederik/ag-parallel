@@ -51,7 +51,7 @@ Apesar do sucesso em muitas aplicações em diferentes domínios, existem, de ac
   \item GA's sequencias podem ficar presos em regiões sub-ótimas, ficando impossibilitados de encontrar uma melhor solução. PGA's podem buscar em multiplos subespaços de busca em paralelo, e tem menos chance de ficar preso em regiões sub-ótimas.
 \end{itemize}
 
-O motivo mais importante para se estudar PGAs, ainda segundo \cite{paraleltax}, é que em muitos casos eles tem uma melhor performance do que os sequenciais, mesmo quando o paralelismo é simulado em uma máquina convencional. Segundo \cite{albasurvey}, eles atingem o objetivo ideal de se construir um algoritmo paralelo, onde o todo é melhor do que a soma das partes.
+O motivo mais importante para se estudar PGAs, ainda segundo \cite{paraleltax}, é que em muitos casos eles tem uma melhor performance do que os sequenciais, mesmo quando o paralelismo é simulado em uma máquina convencional. 
 
 Este trabalho tem como objetivo comparar três tipos de arquiteturas de PGAs: múltiplas populações, arquitetura mestre-escravo e um híbrido de ambas, ou seja, uma combinação de múltiplas populaçõoes com mestre-escravo, aplicadas a otimização de funções. Além disso, compararemos os resultados com um GA sequencial convencional.
 
@@ -77,13 +77,36 @@ Tendo sua inspiração na biologia, alguns termos desta área são usados para d
   \item [Geração] População gerada em cada ciclo do algoritmo, que envolve as funções e transformações previamente definidas.
  \end{description}
 
-O algoritmo apresentado em \cite{holland1975} é usualmente chamado de canônico \cite{yang2002} ou Algoritmo Genético Simples (SGA)\cite{gasurvey} e trabalha, essencialmente, com indivíduos sendo um vetor de bits, ou seja, a solução é codificada em termos de 0 e 1. Como método de seleção, o SGA usa o esquema de \emph{roleta}, onde um determinado indivíduo tem mais chance de ser escolhido para procriar dependendo de seu \emph{fitness}
+O algoritmo apresentado em \cite{holland1975} é usualmente chamado de canônico \cite{yang2002} ou Algoritmo Genético Simples (SGA) \cite{gasurvey} e trabalha, essencialmente, com indivíduos sendo um vetor de bits, ou seja, a solução é codificada em termos de 0 e 1. Como método de seleção, o SGA usa o esquema de \emph{roleta}, onde um determinado indivíduo tem mais chance de ser escolhido para procriar dependendo de seu \emph{fitness}
  calculado.
 
-Algumas variações foram apresentadas, como a inclusão de elitismo \cite{dejong1975}, que consiste em manter um número de indivíduos com melhor \emph{fitness} de uma geração para outra, o \emph{Steady-State Genetic Algorithm} \cite{whitley1988}, que atualiza a população assim que os filhos são gerados, descartando-os ou inserindo-os no lugar de alguns de indivíduos piores da população e o \emph{Tree-Style Genetic Programming Pipeline}, que utiliza uma forma diferente de procriação: com 90\% de probabilidade, dois pais serão selecionados e será efetuado o cruzamento convencional e, por outro lado, com 10\% de probabilidade, será selecionado apenas um pai, que será copiado para a nova população. Existem versões, também, que se preocupam em adaptar as taxas de cruzamento e mutação em tempo de execução e abordagens híbridas, como efetuar uma busca local em cada indivíduo, usando outro algoritmo \cite{bersing1994} \cite{katare2000}.
+Algumas variações foram apresentadas, como a inclusão de elitismo \cite{dejong1975}, que consiste em manter um número de indivíduos com melhor \emph{fitness} de uma geração para outra, o \emph{Steady-State Genetic Algorithm}  \cite{whitley1988}, que atualiza a população assim que os filhos são gerados, descartando-os ou inserindo-os no lugar de alguns de indivíduos piores da população e o \emph{Tree-Style Genetic Programming Pipeline}, que utiliza uma forma diferente de procriação: com 90\% de probabilidade, dois pais serão selecionados e será efetuado o cruzamento convencional e, por outro lado, com 10\% de probabilidade, será selecionado apenas um pai, que será copiado para a nova população. Existem versões, também, que se preocupam em adaptar as taxas de cruzamento e mutação em tempo de execução e abordagens híbridas, como efetuar uma busca local em cada indivíduo, usando outro algoritmo \cite{bersing1994} \cite{katare2000}.
 
-@TODO REVISÃO AG PARALELO: HIERARQUIAS
+Muitos dos algoritmos evolutivos são inerentemente paralelos \cite{hoverstad2010}, pela natureza independente de suas operações \cite{albasurvey}, e o paralelismo surge como uma alternativa para melhorar a eficiência dos GAs. 
 
+Os algoritmos genéticos paralelos (PGA) não são apenas versões paralelas de GA sequenciais. De fato, na maioria dos casos, o todo (PGA) tem melhor performance que a soma das sub-partes que o compões \cite{albasurvey}.
+
+A maneira com que os GAs são paralelizados depende dos seguintes elementos \cite{paraleltax}: 
+\begin{itemize}
+  \item Como é calculado a função \emph{fitness} e como a mutação é aplicada;
+  \item Se multiplas subpopulações \emph{demes} são usadas;
+  \item Se multiplas populações são usadas e como os indivíduos interagem e;
+  \item Como a seleção é aplicada (globalmente ou localmente);
+\end{itemize}
+% @TODO REVISÃO AG PARALELO: HIERARQUIAS
+
+Dos parâmetros acima, pode-se extrair quatro tipos principais de PGA \cite{cantu1998}: 
+\begin{itemize}
+  \item Mestre-escravo: globais de uma única população;
+  \item Única população com paralelização \emph{fine-grained};
+  \item Múltiplas populações com paralelização \emph{coarsed-grained} e;
+  \item Combinação dos métodos acima
+\end{itemize}
+Onde \emph{fine-grained} refere-se a algoritmos paralelos com frequente comunicação entre as partes, enquanto \emph{coarse-grained} refere-se ao contrário.
+
+O esquema mestre-escravo, usa-se uma única população e paraleliza-se os cálculos de \emph{fitness} nos processodores. Os \emph{fine-grained} PGA (FGPGA) são usados em máquinas massivamente paralelas e consistem de uma única população espacialmente estruturada e os \emph{coarsed-grained} PGA (CGPGA, também chamados de GA Distribuídos) consistem de múltiplas populações (também chamado de \emph{demes} ou \emph{ilhas}) que evoluem em paralelo e trocam indivíduos ocasionalmente (esta troca é chamada de \emph{migração}). Aos esquemas que combinam multiplas populações com mestre-escravo ou FGPGA dá se o nome de \emph{híbridos} ou \emph{hierárquicos}.
+
+O primeiro PGA foi proposto em 1987 por Pettey, Leuze e Grefenstette e utilizava o esquema de multiplas populações, migrando sempre o melhor \cite{albasurvey}. \cite{tanese1989} utilizou o esquema de populações distribuídas e obteve bons resultados com migração de 20\% da população a cada 20 gerações. \cite{asparagos1989} usava um FGPGA e aplicava \emph{hill climbing} caso não obtivesse nenhuma melhora em um determinado número de gerações. \cite{adamidis1996} utiliza múltiplas ilhas e é particularmente interessante pois cada uma das ilhas possuem suas próprias probabilidades de mutação, cruzamento e operadores especializados.
 \section{Avaliação Experimental}
 
 Esboço: Comparação entre ag tradicional, ag paralelo com multiplas populações, ag paralelo master slave e ag hibrido das duas anteriores.
