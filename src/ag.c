@@ -177,19 +177,19 @@ double fitness(individual ind) {
  	int i;
  	double sum = 0;
  	for(i = 0; i < IND_SIZE; i++) {
-		sum += (ind.v[i] * ind.v[i] - 10 * cos(10 * M_PI * ind.v[i])) ; //f(x) = sum(x^2)
-		/*sum +=  (ind.v[i] * ind.v[i] );*/
+		/*sum += (ind.v[i] * ind.v[i] - 10 * cos(10 * M_PI * ind.v[i])) ; //f(x) = sum(x^2)*/
+		sum +=  (ind.v[i] * ind.v[i] );
 	}
-	/*return sum;*/
-	return 10 * (IND_SIZE - 1)  + sum;
+	return sum;
+	/*return 10 * (IND_SIZE - 1)  + sum;*/
 }
 
 int is_best(individual i, individual candidate) {
 	double ind = fitness(i);
 	double cand = fitness(candidate);
 	
-	ind = (ind < 0)?-1 * ind:ind;
-	cand = (cand < 0)?-1 * cand:cand;
+	ind = (ind < 0) ? -1 * ind : ind;
+	cand = (cand < 0) ? -1 * cand : cand;
 	
 	if (cand < ind) {
     /*printf("Individuo melhor. Cand: %.7lf Ind: %.7lf\n", cand, ind);*/

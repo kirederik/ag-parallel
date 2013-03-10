@@ -11,6 +11,13 @@ Alba, E. and Troya, J.~M. (1999).
 \newblock A survey of parallel distributed genetic algorithms.
 \newblock {\em Complex.}, 4(4):31--52.
 
+\bibitem[Benitez and Lopes 2010]{benitez2010}
+Benitez, C. and Lopes, H. (2010).
+\newblock Hierarchical parallel genetic algorithm applied to the
+  three-dimensional hp side-chain protein folding problem.
+\newblock In {\em Systems Man and Cybernetics (SMC), 2010 IEEE International
+  Conference on}, pages 2669--2676.
+
 \bibitem[Bersini and Renders 1994]{bersing1994}
 Bersini, H. and Renders, J.-M. (1994).
 \newblock Hybridizing genetic algorithms with hill-climbing methods for global
@@ -98,11 +105,24 @@ Tanese, R. (1989).
   Algorithms}, pages 434--439, San Francisco, CA, USA. Morgan Kaufmann
   Publishers Inc.
 
+\bibitem[Wen-hua et~al. 2007]{zeng2007}
+Wen-hua, Z., Papadopoulos, Y., and Parker, D. (2007).
+\newblock Reliability optimization of series-parallel systems using
+  asynchronous heterogeneous hierarchical parallel genetic algorithm.
+\newblock {\em China Academic Journal Eletctronic Publishing House},
+  1(4):403--412.
+
 \bibitem[Whitley et~al. 1988]{whitley1988}
 Whitley, D., Kauth, J., and of~Computer~Science, C. S. U.~D. (1988).
 \newblock {\em GENITOR: A Different Genetic Algorithm}.
 \newblock Technical report (Colorado State University. Dept. of Computer
   Science). Colorado State University, Department of Computer Science.
+
+\bibitem[Wilson and Banzhaf 2010]{wilson2010}
+Wilson, G. and Banzhaf, W. (2010).
+\newblock Deployment of parallel linear genetic programming using gpus on pc
+  and video game console platforms.
+\newblock {\em Genetic Programming and Evolvable Machines}, 11(2):147--184.
 
 \bibitem[Yang 2002]{yang2002}
 Yang, S. (2002).

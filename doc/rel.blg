@@ -3,50 +3,50 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: rel.aux
 The style file: sbc.bst
 Database file #1: rel.bib
-Repeated entry---line 427 of file rel.bib
+Repeated entry---line 467 of file rel.bib
  : @misc{adamidis1996
  :                   ,
 I'm skipping whatever remains of this entry
 Warning--empty school in dejong1975
-You've used 18 entries,
+You've used 21 entries,
             1935 wiz_defined-function locations,
-            581 strings with 6622 characters,
-and the built_in function-call counts, 6889 in all, are:
-= -- 702
-> -- 199
-< -- 20
-+ -- 72
-- -- 62
-* -- 509
-:= -- 1162
-add.period$ -- 61
-call.type$ -- 18
-change.case$ -- 115
-chr.to.int$ -- 18
-cite$ -- 19
-duplicate$ -- 308
-empty$ -- 525
-format.name$ -- 90
-if$ -- 1414
+            596 strings with 7257 characters,
+and the built_in function-call counts, 8262 in all, are:
+= -- 842
+> -- 243
+< -- 23
++ -- 86
+- -- 76
+* -- 622
+:= -- 1380
+add.period$ -- 70
+call.type$ -- 21
+change.case$ -- 137
+chr.to.int$ -- 21
+cite$ -- 22
+duplicate$ -- 365
+empty$ -- 630
+format.name$ -- 111
+if$ -- 1702
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 21
-newline$ -- 94
-num.names$ -- 54
-pop$ -- 114
+missing$ -- 24
+newline$ -- 109
+num.names$ -- 63
+pop$ -- 134
 preamble$ -- 1
-purify$ -- 121
+purify$ -- 143
 quote$ -- 0
-skip$ -- 241
+skip$ -- 287
 stack$ -- 0
-substring$ -- 487
-swap$ -- 60
-text.length$ -- 5
+substring$ -- 605
+swap$ -- 74
+text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 98
+type$ -- 116
 warning$ -- 1
-while$ -- 57
+while$ -- 68
 width$ -- 0
-write$ -- 240
+write$ -- 279
 (There was 1 error message)
