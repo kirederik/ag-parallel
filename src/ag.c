@@ -163,7 +163,7 @@ void cloneIndividual(individual *dest, individual src) {
 void mutate(individual *ind) {
  	int i;
  	for(i = 0; i < IND_SIZE; i++) {
- 		double prob = (random() % 100) / 100;
+ 		double prob = (random() % 100) / 100.0;
  		if (prob < MUTATION_PROB) {
  			double mut = range_rand(0.05 , -0.05);
  			ind->v[i] = ind->v[i] + mut;
