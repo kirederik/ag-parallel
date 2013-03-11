@@ -128,7 +128,7 @@ double fitness(individual ind) {
 		/*sum += v * v;*/
 		sum += ((v * v) - 10 * cos(M_PI * 10 * v));
 	}
-	//return 10 * 5 + sum;
+	return 10 * 5 + sum;
 	return sum;
 }
 
@@ -294,6 +294,34 @@ individual* applyTournament(population pop) {
 
 }
 
+individual verifyBest(population pop) {
+  double *fc = (double *) malloc(sizeof(double) * omp_get_max_threads());
+  int i;
+  for(i = 0; i < omp_get_max_threads(); i++ ) {
+    *(fc + i) = fitness(pop.i[i]); 
+  }
+  // *(fc) = fitness(i1);
+  // *(fc + 1) = fitness(i2);
+  // *(fc + 2) = fitness(i3);
+  // *(fc + 3) = fitness(i4);
+
+  
+  for (i = 0; i < 4; i++) {
+    int min = i;
+    int j;
+    for (j = i + 1; j < 4; j++) {   
+      if (*(fc + j) < *(fc + min)) {
+        min = j;
+      }
+    }
+    if (min != i) {
+      changeIndividuals(pop.i, i, min);
+    }
+  }
+
+  return pop.i[0];
+}
+
 individual* changeIndividuals(individual* i, int origin, int destiny) {
   individual temp;
 
@@ -332,72 +360,93 @@ int main(int argc, char **argv) {
   int best_generation = generation;
   
   //while(fitness(best) != 0 && generation++ < MAX_GENERATIONS) {
-  #pragma omp parallel shared(pop, fbest, best_generation) private(breed, popsize)
-	{
-		popsize = MAX_POP_SIZE;
-		breed = popsize / 2;
-		#pragma omp for lastprivate(generation)
-		  for (generation = 0; generation < MAX_GENERATIONS; generation++) {
-		    int i, j = 0;   
-		    population q;
-		    if(!popalloc(&q, popsize)) {
-		      puts("Memory Error");
-		      exit(1);
-		    }
+  // #pragma omp parallel shared(pop, fbest, best_generation) private(breed, popsize)
+	// {
+	popsize = MAX_POP_SIZE;
+	breed = popsize / 2;
+	
 
-		    //fitness(pop.i[0]);
-		    // printf("\nfitness: %lf\n", fitness(pop.i[0]));
-		    // printIndividual(pop.i[0]);
+  for (generation = 0; generation < MAX_GENERATIONS; generation++) {
+    int i, j = 0;   
+    population q;
+    if(!popalloc(&q, popsize)) {
+      puts("Memory Error");
+      exit(1);
+    }
 
-		    
-			    for(i = 0; i < breed; i++) {
-			    	//time_t seconds;
+	    //fitness(pop.i[0]);
+	    // printf("\nfitness: %lf\n", fitness(pop.i[0]));
+	    // printIndividual(pop.i[0]);
+	  #pragma omp parallel for shared(q, popsize, breed, pop) private(i, j) schedule(static)
+	    for(i = 0; i < popsize; i += 2) {
+        
+        // if (!control) {
+        //   j = i * 2;
+        //   control = 1;
+        //   //printf("Primeiro Tid %d j = %d i = %d\n", omp_get_thread_num(), j, i);
+        // }
+        
+	      individual c1, c2;
+	      individual* tournament = applyTournament(pop);
 
-					  //seconds = time (NULL);
-			  
-			      individual c1, c2;
-			      individual* tournament = applyTournament(pop);
+	      //printf ("%ld\n ", (seconds - time(NULL)));
+        
+	      applyCrossover(&c1, &c2, popsize, *tournament, *(tournament + 1));
 
-			      //printf ("%ld\n ", (seconds - time(NULL)));
+	      applyCrossover(&c1, &c2, popsize, getIndividual(pop), getIndividual(pop));
 
-			      applyCrossover(&c1, &c2, popsize, *tournament, *(tournament + 1));
+	      mutate(&c1);
+	      mutate(&c2);
 
-			      applyCrossover(&c1, &c2, popsize, getIndividual(pop), getIndividual(pop));
+        // printf("Tid %d j = %d i = %d\n", omp_get_thread_num(), j, i);
+	      cloneIndividual(&q.i[i], c1);
+	      cloneIndividual(&q.i[i + 1], c2);
+        //puts("Aqui 2");
+	      free(c1.v); free(c2.v);  
+	      free(tournament);
+	    }
+			
+    popfree(&pop, popsize);
+    pop = q;
 
-			      mutate(&c1);
-			      mutate(&c2);
+    if(is_best(pop.i[0], best))  {   
+      cloneIndividual(&pop.i[0], best);
+    } else {
+      cloneIndividual(&best, pop.i[0]);
+    }
+    //printPop(pop);
+    population bests;
+    if(!popalloc(&bests, omp_get_max_threads())) {
+      puts("Memory Error");
+      exit(1);
+    }
+    int control = 0;
+    
+    #pragma omp parallel for shared(pop, bests) private(i) firstprivate(control)
+	    for(i = 0; i < popsize; i++) {
+        if (!control) {
+          bests.i[omp_get_thread_num()] = pop.i[i];
+          control = 1;
+        }
 
+	      if(is_best(bests.i[omp_get_thread_num()], pop.i[i]))  {      
+	      	//printf("Tid 2 %d\n", omp_get_thread_num());
+	        //puts("opa");    
+	        cloneIndividual(&bests.i[omp_get_thread_num()], pop.i[i]);
+	        //fbest = fitness(best);
+	        //best_generation = generation;
+	      }
+	    }
 
-			      cloneIndividual(&q.i[j++], c1);
-			      cloneIndividual(&q.i[j++], c2);
-			      free(c1.v); free(c2.v);  
-			      free(tournament);
-			    }
-		    
-
-				
-		    // popfree(&pop, popsize);
-		    // pop = q;
-
-		    if(is_best(pop.i[0], best))  {   
-		      cloneIndividual(&pop.i[0], best);
-		    } else {
-		      cloneIndividual(&best, pop.i[0]);
-		    }
-		    //printPop(pop);
-		    for(i = 1; i < popsize; i++) {
-		      if(is_best(best, pop.i[i]))  {      
-		      	//printf("Tid 2 %d\n", omp_get_thread_num());
-		        //puts("opa");    
-		        cloneIndividual(&best, pop.i[i]);
-		        fbest = fitness(best);
-		        best_generation = generation;
-		      }
-		    }
-		  	
-		  } 
+    individual cand_best = verifyBest(bests);
+    if(is_best(best, cand_best)) {
+      cloneIndividual(&best, cand_best);
+    }
 	}
-  //printPop(pop);
+
+
+	
+  printPop(pop);
   printf("best single individual: ");
   printIndividual(best);
   printf("\nfitness: %lf\n", fitness(best));
