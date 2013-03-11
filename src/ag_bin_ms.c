@@ -377,7 +377,7 @@ int main(int argc, char **argv) {
 	    //fitness(pop.i[0]);
 	    // printf("\nfitness: %lf\n", fitness(pop.i[0]));
 	    // printIndividual(pop.i[0]);
-	  #pragma omp parallel for shared(q, popsize, breed, pop) private(i, j) schedule(static)
+	  #pragma omp parallel for shared(q, popsize, breed, pop) private(i, j) schedule(dynamic)
 	    for(i = 0; i < popsize; i += 2) {
         
         // if (!control) {
@@ -385,6 +385,8 @@ int main(int argc, char **argv) {
         //   control = 1;
         //   //printf("Primeiro Tid %d j = %d i = %d\n", omp_get_thread_num(), j, i);
         // }
+
+        
         
 	      individual c1, c2;
 	      individual* tournament = applyTournament(pop);

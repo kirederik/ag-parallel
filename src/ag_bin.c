@@ -107,6 +107,7 @@ individual getIndividual(population p) {
 	int index = a % MAX_POP_SIZE;
 	return p.i[index];
 }
+
 int binToDec(int i, individual ind) {
 	int k = i;
 	int j = k;
