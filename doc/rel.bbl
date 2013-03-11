@@ -1,5 +1,8 @@
 \begin{thebibliography}{}
 
+\bibitem[lim ]{lim2007}
+
+
 \bibitem[Adamidis and Petridis May]{adamidis1996}
 Adamidis, P. and Petridis, V. (May).
 \newblock Co-operating populations with different evolution behaviours.
@@ -74,6 +77,12 @@ Katare, S., Bhan, A., Caruthers, J.~M., Delgass, W.~N., and Venkatasubramanian,
 \newblock A hybrid genetic algorithm for efficient parameter estimation of
   large kinetic models.
 \newblock {\em Computers \& Chemical Engineering}, 28(12):2569 -- 2581.
+
+\bibitem[Lee et~al. 2009]{heesung2009}
+Lee, H., Hong, S., and Kim, E. (2009).
+\newblock Optimal classifier design method using hierarchical fair competition
+  model based parallel genetic algorithm.
+\newblock In {\em ICCAS-SICE, 2009}, pages 2907--2910.
 
 \bibitem[Luke 2009]{luke2009}
 Luke, S. (2009).

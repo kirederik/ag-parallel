@@ -104,12 +104,53 @@ Dos parâmetros acima, pode-se extrair quatro tipos principais de PGA \cite{cant
 \end{itemize}
 Onde \emph{fine-grained} refere-se a algoritmos paralelos com frequente comunicação entre as partes, enquanto \emph{coarse-grained} refere-se ao contrário.
 
-O esquema mestre-escravo, usa-se uma única população e paraleliza-se os cálculos de \emph{fitness} nos processodores. Os \emph{fine-grained} PGA (FGPGA) são usados em máquinas massivamente paralelas e consistem de uma única população espacialmente estruturada e os \emph{coarsed-grained} PGA (CGPGA, também chamados de GA Distribuídos) consistem de múltiplas populações (também chamado de \emph{demes} ou \emph{ilhas}) que evoluem em paralelo e trocam indivíduos ocasionalmente (esta troca é chamada de \emph{migração}). Aos esquemas que combinam multiplas populações com mestre-escravo ou FGPGA dá se o nome de \emph{hierárquicos} (HPGA).
+No esquema mestre-escravo, usa-se uma única população e paraleliza-se os cálculos de \emph{fitness} nos processodores. Os \emph{fine-grained} PGA (FGPGA) são usados em máquinas massivamente paralelas e consistem de uma única população espacialmente estruturada e os \emph{coarsed-grained} PGA (CGPGA, também chamados de GA Distribuídos) consistem de múltiplas populações (também chamado de \emph{demes} ou \emph{ilhas}) que evoluem em paralelo e trocam indivíduos ocasionalmente (esta troca é chamada de \emph{migração}). Aos esquemas que combinam multiplas populações com mestre-escravo ou FGPGA dá se o nome de \emph{hierárquicos} (HPGA).
 
 O primeiro PGA foi proposto em 1987 por Pettey, Leuze e Grefenstette e utilizava o esquema de multiplas populações, migrando sempre o melhor \cite{albasurvey}. \cite{tanese1989} utilizou o esquema de populações distribuídas e obteve bons resultados com migração de 20\% da população a cada 20 gerações. \cite{asparagos1989} usavam um FGPGA e aplicava \emph{hill climbing} caso não obtivesse nenhuma melhora em um determinado número de gerações. \cite{adamidis1996} utilizam múltiplas ilhas e é particularmente interessante pois cada uma das ilhas possuem suas próprias probabilidades de mutação, cruzamento e operadores especializados. \cite{wilson2010} apresentam um PGA que faz uso dos diversos núcleos das placas de vídeo de consoles de video-game, obtendo bons resultados em tempo de execução reduzido.
 
-\cite{benitez2010} apresentam um modelo hierárquico (multiplas populações \emph{coarsed-grained} no nível mais alto e, no nível mais baixo, mestre-escravo) para o problema de desdobramento de proteínas. \cite{zeng2007} sugere um novo PGA, chamado de \emph{asynchronous heterogeneos hierarchical parallel genetic algorithm} (AHHPGA) aplicado a otimização de confiabilidade de sistemas paralelo em série, e usa um modelo \emph{coarsed-grained} como camada superior e um modelo \emph{fine-grained} na camada inferior. Este modelo proposto possui multiplas populações heterogêneas, com diferentes níveis de exploração das soluções e diferentes topologias em cada subpopulação. A migração acontece de forma assíncrona, tanto o envio quanto a recepção de novos indivíduos. Os resultados obtidos por este modelo foram ligeiramente melhores do que os obtidos por um GA tradicional, mas a faltou uma análise estatística elaborada para corroborar o modelo.
-\section{Avaliação Experimental}
+\cite{lim2007} apresentam um arcabouço para desenvolvimento de HPGA com suporte à computação em grade, e sugeriram, através de um estudo empírico utilizando problemas de \emph{benchmark} e problemas reais, que pode-se obter uma aceleração desde que os limites do custo da função \emph{fitness}, tamanho do \emph{cluster} e \emph{overheads} na comunicação sejam satisfeitos.
+
+ \cite{zeng2007} sugere um novo PGA, chamado de \emph{asynchronous heterogeneos hierarchical parallel genetic algorithm} (AHHPGA) aplicado para a resolução do \emph{Redundancy Allocation Problem}, e usa um modelo \emph{coarsed-grained} como camada superior e um modelo \emph{fine-grained} na camada inferior. Este modelo proposto possui multiplas populações heterogêneas, com diferentes níveis de exploração das soluções e diferentes topologias em cada subpopulação. A migração acontece de forma assíncrona, tanto o envio quanto a recepção de novos indivíduos. Os resultados obtidos por este modelo foram ligeiramente melhores do que os obtidos por um GA tradicional, mas a faltou uma análise estatística elaborada para corroborar o modelo. 
+
+\cite{heesung2009} apresentam um modelo hierarquico com competição justa, ou seja, a população é divida em camadas (ou classes) de acordo com o \emph{fitness} do indivíduo e estes só competem com outros da mesma camada. Indivíduos mudam de classe quando atingem um grau de aptidão superior ao limiar de aceitação da outra classe. Desta forma, mantém-se uma maior diversidade na população, comprovada pelos testes realizados.
+
+ \cite{benitez2010} apresentam um modelo hierárquico (multiplas populações \emph{coarsed-grained} no nível mais alto e, no nível mais baixo, mestre-escravo) para o problema de desdobramento de proteínas, obtendo melhores resultados em 7 de 10 em comparação com o \emph{benchmark} de outro PGA não-hierárquico..
+
+
+\section{Experimentos} % (fold)
+\label{sec:experimentos}
+
+\subsubsection{Problema} % (fold)
+\label{ssub:problema}
+
+Três funções de \emph{benchmark} da literatura foram escolhidas, duas definidas em \cite{dejong1975} e a função de Rastrigin. Aplicamos estas funções ao problema de minimização.
+
+A primeira função de \cite{dejong1975}, a Função Esfera (\emph{Sphere Function}), é relativamente simples. Não possui ótimos locais e é facilmente resolvida por um GA. O valor de $x$ varia entre $-5.12$ e $+5.12$.
+
+\[
+  f(Sphere) = \sum_{i = 1}^{n} x_{i}^2
+\]
+
+% Um subconjunto das funções de \emph{benchmark} definidas em \cite{dejong1975} foram utilizatas com o objetivo de minimização. Problemas propostos por \cite{dejong1975} como maximização foram convertidos para um problema de minimização. Mais espécificamente, utilizamos a primeira (F1), segunda (F2) e terceira (F3) funções de \cite{dejong1975}.
+
+
+\[
+  F2 = \sum_{i = 0}^{n-1} (100 \times (x_{i+1} - x_{i}^2)^2 + (x_i - 1)^2)
+\]
+
+Os códigos foram desenvolvido em C, com uso da biblioteca \emph{OpenMP} para paralelização. Todos os testes foram executados em uma máquina Linux de 32bits com 4 \emph{cores} de processamento.
+
+
+
+% subsubsection problema (end)
+
+\subsubsection{Representação e Parâmetros} % (fold)
+\label{ssub:representacao}
+
+Os casos de testes consistiam em achar um conjunto de elementos $(x_0, x_1, x_2, \dots x_n)$ que minimizasse as funções definidas na seção \ref{ssub:problema}.
+
+% subsubsection modelagem (end)
+
 
 Esboço: Comparação entre ag tradicional, ag paralelo com multiplas populações, ag paralelo master slave e ag hibrido das duas anteriores.
 
@@ -119,6 +160,7 @@ Modelagem: Vetor de números reais. Cruzamento convencional. Mutação: pequena 
 
 Análise: tabelas: tempo gasto, resultado médio em 10 execuções para cada um dos ag's, ótimo conhecido. Gráfico: fitness x geração, testes: kruskal-wallis e/ou analise de covariancia (ancova).
 
+% section experimentos (end)
 \bibliographystyle{sbc}
 \bibliography{rel}
 

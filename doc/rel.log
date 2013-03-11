@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.3.7)  9 MAR 2013 22:45
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.3.7)  11 MAR 2013 00:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -582,38 +582,48 @@ Underfull \hbox (badness 3449) in paragraph at lines 98--100
 ci-pais de PGA
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 111--112
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 117--118
 []\OT1/ptm/m/n/12 [[]] apre-sen-tam um mo-delo hier[]arquico (mul-ti-plas
  []
 
-[3] (./rel.bbl [4]
-Underfull \hbox (badness 4940) in paragraph at lines 79--85
+
+Underfull \hbox (badness 3039) in paragraph at lines 126--127
+\OT1/ptm/m/n/12 Tr[]es fun[][]oes de \OT1/ptm/m/it/12 ben-ch-mark \OT1/ptm/m/n/
+12 da li-te-ra-tura fo-ram es-co-lhi-das, duas de-fi-ni-das em
+ []
+
+[4] (./rel.bbl [5]
+Underfull \hbox (badness 4940) in paragraph at lines 88--94
 []\OT1/ptm/m/n/12 Luke, S. (2009).  \OT1/ptm/m/it/12 Es-sen-ti-als of Me-taheu-
 ris-tics\OT1/ptm/m/n/12 .  Lulu.  Dis-pon[]^^Pvel em:
  []
 
-) [5] (./rel.aux) ) 
+) [6] (./rel.aux) ) 
 Here is how much of TeX's memory you used:
- 4582 strings out of 495039
- 62645 string characters out of 3181250
- 155041 words of memory out of 3000000
- 7687 multiletter control sequences out of 15000+200000
+ 4594 strings out of 495039
+ 62846 string characters out of 3181250
+ 154098 words of memory out of 3000000
+ 7699 multiletter control sequences out of 15000+200000
  18188 words of font info for 40 fonts, out of 3000000 for 9000
  16 hyphenation exceptions out of 8191
- 38i,8n,28p,1001b,320s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,8n,28p,998b,320s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}<
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ti
-mes/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on rel.pdf (5 pages, 106021 bytes).
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/c
+ourier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on rel.pdf (6 pages, 142552 bytes).
 PDF statistics:
- 53 PDF objects out of 1000 (max. 8388607)
- 37 compressed objects within 1 object stream
+ 72 PDF objects out of 1000 (max. 8388607)
+ 51 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
