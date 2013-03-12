@@ -58,7 +58,7 @@ typedef struct population {
 
 /** Define initial parameters **/
 #define MAX_POP_SIZE 400
-#define IND_SIZE 50
+#define IND_SIZE 20
 #define MAX_GENERATIONS 3000
 #define TOURNAMENT 4
 #define MUTATION_PROB 0.1
@@ -125,11 +125,11 @@ double fitness(individual ind) {
 	double sum = 0;
 	for(i = 0; i < IND_SIZE; i+=10) {
 		double v = binToDec(i, ind)/100.0;
-		/*sum += v * v;*/
-		sum += ((v * v) - 10 * cos(M_PI * 10 * v));
+		sum += v * v;
+		/*sum += ((v * v) - 10 * cos(M_PI * 2 * v));*/
 	}
-	return 10 * 5 + sum;
-	/*return sum;*/
+	/*return 10 * 20 + sum;*/
+	return sum;
 }
 
 
