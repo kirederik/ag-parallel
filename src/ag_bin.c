@@ -107,6 +107,7 @@ individual getIndividual(population p) {
 	int index = a % MAX_POP_SIZE;
 	return p.i[index];
 }
+
 int binToDec(int i, individual ind) {
 	int k = i;
 	int j = k;
@@ -331,11 +332,11 @@ int main(int argc, char **argv) {
 
 	for (generation = 0; generation < MAX_GENERATIONS; generation++) {
 		int i, j = 0;		
-		population q;
-		if(!popalloc(&q, popsize)) {
-			puts("Memory Error");
-			exit(1);
-		}
+		// population q;
+		// if(!popalloc(&q, popsize)) {
+		// 	puts("Memory Error");
+		// 	exit(1);
+		// }
 
 		for(i = 0; i < breed; i++) {
 			individual c1, c2;
@@ -349,14 +350,14 @@ int main(int argc, char **argv) {
 			mutate(&c2);
 
 
-			cloneIndividual(&q.i[j++], c1);
-			cloneIndividual(&q.i[j++], c2);
+			cloneIndividual(&pop.i[j++], c1);
+			cloneIndividual(&pop.i[j++], c2);
 			free(c1.v); free(c2.v);  
 			free(tournament);
 		}
 
-		popfree(&pop, popsize);
-		pop = q;
+		// popfree(&pop, popsize);
+		// pop = q;
 
 		if(is_best(pop.i[0], best))  {   
 			cloneIndividual(&pop.i[0], best);
