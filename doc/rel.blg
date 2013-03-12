@@ -3,55 +3,50 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: rel.aux
 The style file: sbc.bst
 Database file #1: rel.bib
-Repeated entry---line 521 of file rel.bib
+Repeated entry---line 509 of file rel.bib
  : @misc{adamidis1996
  :                   ,
 I'm skipping whatever remains of this entry
-Warning--to sort, need author or key in lim2007
-Warning--empty author in lim2007
-Warning--empty year in lim2007
-Warning--empty title in lim2007
-Warning--empty journal in lim2007
 Warning--empty school in dejong1975
-You've used 23 entries,
+You've used 24 entries,
             1935 wiz_defined-function locations,
-            602 strings with 7450 characters,
-and the built_in function-call counts, 9054 in all, are:
-= -- 918
-> -- 261
-< -- 24
-+ -- 92
-- -- 82
-* -- 684
-:= -- 1490
-add.period$ -- 74
-call.type$ -- 23
-change.case$ -- 149
-chr.to.int$ -- 23
-cite$ -- 30
-duplicate$ -- 407
-empty$ -- 698
-format.name$ -- 118
-if$ -- 1873
+            613 strings with 7808 characters,
+and the built_in function-call counts, 9762 in all, are:
+= -- 995
+> -- 297
+< -- 25
++ -- 104
+- -- 94
+* -- 731
+:= -- 1612
+add.period$ -- 79
+call.type$ -- 24
+change.case$ -- 161
+chr.to.int$ -- 24
+cite$ -- 25
+duplicate$ -- 436
+empty$ -- 740
+format.name$ -- 132
+if$ -- 2025
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 26
-newline$ -- 117
-num.names$ -- 66
-pop$ -- 159
+missing$ -- 27
+newline$ -- 124
+num.names$ -- 72
+pop$ -- 164
 preamble$ -- 1
-purify$ -- 156
+purify$ -- 167
 quote$ -- 0
-skip$ -- 319
+skip$ -- 346
 stack$ -- 0
-substring$ -- 666
-swap$ -- 86
-text.length$ -- 7
+substring$ -- 717
+swap$ -- 99
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 128
-warning$ -- 6
-while$ -- 72
+type$ -- 134
+warning$ -- 1
+while$ -- 79
 width$ -- 0
-write$ -- 298
+write$ -- 318
 (There was 1 error message)

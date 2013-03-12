@@ -114,7 +114,7 @@ O primeiro PGA foi proposto em 1987 por Pettey, Leuze e Grefenstette e utilizava
 
 \cite{heesung2009} apresentam um modelo hierarquico com competição justa, ou seja, a população é divida em camadas (ou classes) de acordo com o \emph{fitness} do indivíduo e estes só competem com outros da mesma camada. Indivíduos mudam de classe quando atingem um grau de aptidão superior ao limiar de aceitação da outra classe. Desta forma, mantém-se uma maior diversidade na população, comprovada pelos testes realizados.
 
- \cite{benitez2010} apresentam um modelo hierárquico (multiplas populações \emph{coarsed-grained} no nível mais alto e, no nível mais baixo, mestre-escravo) para o problema de desdobramento de proteínas, obtendo melhores resultados em 7 de 10 em comparação com o \emph{benchmark} de outro PGA não-hierárquico..
+ \cite{benitez2010} apresentam um modelo hierárquico (multiplas populações \emph{coarsed-grained} no nível mais alto e, no nível mais baixo, mestre-escravo) para o problema de desdobramento de proteínas, obtendo melhores resultados em 7 de 10 em comparação com o \emph{benchmark} de outro PGA não-hierárquico.
 
 
 \section{Experimentos} % (fold)
@@ -123,24 +123,32 @@ O primeiro PGA foi proposto em 1987 por Pettey, Leuze e Grefenstette e utilizava
 \subsubsection{Problema} % (fold)
 \label{ssub:problema}
 
-Três funções de \emph{benchmark} da literatura foram escolhidas, duas definidas em \cite{dejong1975} e a função de Rastrigin. Aplicamos estas funções ao problema de minimização.
+Três funções de \emph{benchmark} da literatura foram escolhidas, duas definidas em \cite{dejong1975} e a função de Rastrigin. Aplicamos estas funções ao problema de minimização. As definições das funções foram extraídas de \cite{luke2005}.
 
 A primeira função de \cite{dejong1975}, a Função Esfera (\emph{Sphere Function}), é relativamente simples. Não possui ótimos locais e é facilmente resolvida por um GA. O valor de $x$ varia entre $-5.12$ e $+5.12$.
 
-\[
+\begin{equation} \label{eq:spher}
   f(Sphere) = \sum_{i = 1}^{n} x_{i}^2
-\]
+\end{equation}
 
-% Um subconjunto das funções de \emph{benchmark} definidas em \cite{dejong1975} foram utilizatas com o objetivo de minimização. Problemas propostos por \cite{dejong1975} como maximização foram convertidos para um problema de minimização. Mais espécificamente, utilizamos a primeira (F1), segunda (F2) e terceira (F3) funções de \cite{dejong1975}.
+A segunda função de \cite{dejong1975}, a Função \emph{Step} (\emph{Step Function}) contêm múltiplos \emph{plateaux}. Indivíduos no mesmo \emph{plateau} tem \emph{fitness} equivalentes, o que pode significamente diminuir a velocidade de convergência de algoritmos de otimização. O valor de $x$ varia entra $-5.12$ e $+5.12$.
+
+\begin{equation} \label{eq:step}
+  f(Step) = \sum_{i = 1}^{n} \lfloor x_{i} \rfloor
+\end{equation}
+
+A função de Rastrigin é outro problema muito difícil já que define um espaço de busca muito grande, com $n = 20$ com valores entre $-5.12$ e $+5.12$. Além disso, possui muitos ótimos locais. Esta combinação faz com que muitos algoritmos possuam grande dificuldade para encontrar a solução ótima. As variáveis $A$ e $\omega$ controlam a frequencia e modulação do espaço de busca. No estudo feito, $A = 10$ e $\omega = 2\pi$;
+
+\begin{equation} \label{eq:rast}
+  f(Rastrigin) = 10 \times n + \sum_{i=1}^{n} \left[ x_{i}^2 - 10 \times cos(2 \pi x_i)\right]
+\end{equation}
 
 
-\[
-  F2 = \sum_{i = 0}^{n-1} (100 \times (x_{i+1} - x_{i}^2)^2 + (x_i - 1)^2)
-\]
+% \[
+%   F2 = \sum_{i = 0}^{n-1} (100 \times (x_{i+1} - x_{i}^2)^2 + (x_i - 1)^2)
+% \]
 
-Os códigos foram desenvolvido em C, com uso da biblioteca \emph{OpenMP} para paralelização. Todos os testes foram executados em uma máquina Linux de 32bits com 4 \emph{cores} de processamento.
-
-
+Os códigos foram desenvolvido em C, com uso da biblioteca \emph{OpenMP} para paralelização. Todos os testes foram executados em uma máquina Linux de 64bits com 4 \emph{cores} de processamento.
 
 % subsubsection problema (end)
 
@@ -148,6 +156,8 @@ Os códigos foram desenvolvido em C, com uso da biblioteca \emph{OpenMP} para pa
 \label{ssub:representacao}
 
 Os casos de testes consistiam em achar um conjunto de elementos $(x_0, x_1, x_2, \dots x_n)$ que minimizasse as funções definidas na seção \ref{ssub:problema}.
+
+Utilizando o método definido em \cite[p. 3]{gasurvey}, 
 
 % subsubsection modelagem (end)
 

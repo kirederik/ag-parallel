@@ -1,24 +1,15 @@
-<<<<<<< HEAD
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.3.7)  11 MAR 2013 00:26
-=======
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.10)  10 MAR 2013 12:19
->>>>>>> 3fb3c78dbecdb5f3b63b013cd2c96a1f99001ee5
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.3.7)  11 MAR 2013 23:00
 entering extended mode
+ restricted \write18 enabled.
  %&-line parsing enabled.
 **rel.tex
 (./rel.tex
-LaTeX2e <2009/09/24>
-Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
-yphenation, farsi, arabic, croatian, bulgarian, ukrainian, russian, czech, slov
-ak, danish, dutch, finnish, french, basque, ngerman, german, german-x-2009-06-1
-9, ngerman-x-2009-06-19, ibycus, monogreek, greek, ancientgreek, hungarian, san
-skrit, italian, latin, latvian, lithuanian, mongolian2a, mongolian, bokmal, nyn
-orsk, romanian, irish, coptic, serbian, turkish, welsh, esperanto, uppersorbian
-, estonian, indonesian, interlingua, icelandic, kurmanji, slovenian, polish, po
-rtuguese, spanish, galician, catalan, swedish, ukenglish, pinyin, loaded.
-(/usr/share/texmf-texlive/tex/latex/base/article.cls
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, po
+rtuguese, loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/share/texmf-texlive/tex/latex/base/size12.clo
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
 File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -35,20 +26,23 @@ File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 ) (./sbc-template.sty
 Package: sbc-template 2001/06/09
 
-(/usr/share/texmf-texlive/tex/latex/geometry/geometry.sty
-Package: geometry 2008/12/21 v4.2 Page Geometry
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
 
-(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-(/usr/share/texmf-texlive/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in pdf mode detected.
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
-(/usr/share/texmf-texlive/tex/generic/oberdiek/ifvtex.sty
-Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count87
 \Gm@cntv=\count88
@@ -57,122 +51,156 @@ Package ifvtex Info: VTeX not detected.
 \Gm@wd@mp=\dimen104
 \Gm@odd@mp=\dimen105
 \Gm@even@mp=\dimen106
+\Gm@layoutwidth=\dimen107
+\Gm@layoutheight=\dimen108
+\Gm@layouthoffset=\dimen109
+\Gm@layoutvoffset=\dimen110
 \Gm@dimlist=\toks15
-
-(/usr/share/texmf-texlive/tex/xelatex/xetexconfig/geometry.cfg))
+)
 (./caption2.sty
 Package: caption2 2002/08/03 v2.1 Customising captions (AS)
-\captionmargin=\dimen107
-\captionwidth=\dimen108
-\captionindent=\dimen109
+\captionmargin=\dimen111
+\captionwidth=\dimen112
+\captionindent=\dimen113
 Package caption2 Info: Running in caption2 v2.0 compatibility mode on input lin
 e 147.
-\captionlinewidth=\dimen110
-) (/usr/share/texmf-texlive/tex/latex/psnfss/times.sty
+\captionlinewidth=\dimen114
+) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty
 Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
 )
 \c@instn=\count90
 
-(/usr/share/texmf-texlive/tex/latex/titlesec/titlesec.sty
-Package: titlesec 2007/08/12 v2.8 Sectioning titles
+(/usr/share/texlive/texmf-dist/tex/latex/titlesec/titlesec.sty
+Package: titlesec 2011/12/15 v2.10.0 Sectioning titles
 \ttl@box=\box26
 \beforetitleunit=\skip43
 \aftertitleunit=\skip44
-\ttl@plus=\dimen111
-\ttl@minus=\dimen112
+\ttl@plus=\dimen115
+\ttl@minus=\dimen116
 \ttl@toksa=\toks16
-\titlewidth=\dimen113
-\titlewidthlast=\dimen114
-\titlewidthfirst=\dimen115
+\titlewidth=\dimen117
+\titlewidthlast=\dimen118
+\titlewidthfirst=\dimen119
 ))
-(/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/etc/texmf/tex/latex/config/graphics.cfg
-File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
-(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
 \Gread@gobject=\count91
 ))
-\Gin@req@height=\dimen116
-\Gin@req@width=\dimen117
+\Gin@req@height=\dimen120
+\Gin@req@width=\dimen121
 )
-(/usr/share/texmf-texlive/tex/latex/ltxmisc/url.sty
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip10
 Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
 )
-(/usr/share/texmf-texlive/tex/latex/algorithm2e/algorithm2e.sty
-Package: algorithm2e 2005/10/04 v3.9 algorithms environments
+(/usr/share/texlive/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
+Package: algorithm2e 2008/00/00 v3.10 algorithms environments
 \c@AlgoLine=\count92
 
-(/usr/share/texmf-texlive/tex/latex/base/ifthen.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 )
-(/usr/share/texmf-texlive/tex/latex/tools/xspace.sty
-Package: xspace 2006/05/08 v1.12 Space after command names (DPC,MH)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
+Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
 )
+(/usr/share/texlive/texmf-dist/tex/latex/relsize/relsize.sty
+Package: relsize 2011/09/21 ver 4.0
+
+Examine \normalsize starts \@setfontsize size may be \@xiipt. 
+Examine \small starts \@setfontsize size may be \@xipt. 
+Examine \footnotesize starts \@setfontsize size may be \@xpt. 
+Examine \large starts \@setfontsize size may be \@xivpt. 
+Examine \Large starts \@setfontsize size may be \@xviipt. 
+Examine \LARGE starts \@setfontsize size may be \@xxpt. 
+Examine \scriptsize starts \@setfontsize size may be \@viiipt. 
+Examine \tiny starts \@setfontsize size may be \@vipt. 
+Examine \huge starts \@setfontsize size may be \@xxvpt. 
+Examine \Huge starts \@setfontsize size may be \@xxvpt. )
 ********************************************************
-Package `algorithm2e' Release 3.9 -- october 04 2005 --
+Package `algorithm2e' Release 4.01 -- december 14 2009 --
 - algorithm2e-announce@lirmm.fr mailing list for announcement about releases
 - algorithm2e-discussion@lirmm.fr mailing list for discussion about package
 subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 - Author: Christophe Fiorio (fiorio@lirmm.fr)
 ********************************************************
 \skiptotal=\skip45
-\skiprule=\skip46
-\skiphlne=\skip47
-\skiptext=\skip48
-\skiplength=\skip49
-\algomargin=\skip50
-\skipalgocfslide=\skip51
-\algowidth=\dimen118
-\inoutsize=\dimen119
-\inoutline=\dimen120
+\skiplinenumber=\skip46
+\skiprule=\skip47
+\skiphlne=\skip48
+\skiptext=\skip49
+\skiplength=\skip50
+\algomargin=\skip51
+\skipalgocfslide=\skip52
+\algowidth=\dimen122
+\inoutsize=\dimen123
+\inoutline=\dimen124
+\interspacetitleruled=\dimen125
+\interspacealgoruled=\dimen126
+\interspacetitleboxruled=\dimen127
 \algocf@inoutbox=\box27
 \algocf@inputbox=\box28
-\AlCapSkip=\skip52
-\AlCapHSkip=\skip53
-\algocf@capbox=\box29
+\AlCapSkip=\skip53
+\AlCapHSkip=\skip54
+\algocf@nlbox=\box29
+\algocf@hangingbox=\box30
+\algocf@capbox=\box31
+\algoheightruledefault=\skip55
+\algoheightrule=\skip56
+\algotitleheightruledefault=\skip57
+\algotitleheightrule=\skip58
 \c@algocfline=\count93
-\c@algocf=\count94
-\algocf@algoframe=\box30
-\algocf@algobox=\box31
-) (/var/lib/texmf/tex/generic/babel/babel.sty
-Package: babel 2008/07/06 v3.8l The Babel package
+\c@algocfproc=\count94
+\c@algocf=\count95
+\algocf@algoframe=\box32
+\algocf@algobox=\box33
+) (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2008/07/08 v3.8m The Babel package
 
-(/usr/share/texmf-texlive/tex/generic/babel/portuges.ldf
+(/usr/share/texlive/texmf-dist/tex/generic/babel/portuges.ldf
 Language: portuges 2008/03/18 v1.2q Portuguese support from the babel system
 
-(/usr/share/texmf-texlive/tex/generic/babel/babel.def
-File: babel.def 2008/07/06 v3.8l Babel common definitions
-\babel@savecnt=\count95
-\U@D=\dimen121
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2008/07/08 v3.8m Babel common definitions
+\babel@savecnt=\count96
+\U@D=\dimen128
 )
 \l@brazil = a dialect from \language\l@portuges 
 Package babel Info: Making " an active character on input line 145.
 ))
-(/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2008/03/30 v1.1d Input encoding file
 \inpenc@prehook=\toks17
 \inpenc@posthook=\toks18
 
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
 
-(/usr/share/texmf-texlive/tex/latex/base/t1enc.dfu
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu
 File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -322,7 +350,7 @@ File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
 
-(/usr/share/texmf-texlive/tex/latex/base/ot1enc.dfu
+(/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu
 File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -353,7 +381,7 @@ File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
 
-(/usr/share/texmf-texlive/tex/latex/base/omsenc.dfu
+(/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu
 File: omsenc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
    defining Unicode char U+00B6 (decimal 182)
@@ -377,12 +405,13 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-(/usr/share/texmf-texlive/tex/latex/enumitem/enumitem.sty
-Package: enumitem 2009/05/18 v2.2 Customized lists
+(/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
+Package: enumitem 2011/09/28 v3.5.2 Customized lists
+\labelindent=\skip59
+\enit@outerparindent=\dimen129
 \enit@toks=\toks19
-\labelindent=\skip54
-\enit@outerparindent=\dimen122
-\enitdp@desc=\count96
+\enit@inbox=\box34
+\enitdp@description=\count97
 ) (./rel.aux)
 \openout1 = `rel.aux'.
 
@@ -400,63 +429,100 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
 LaTeX Font Info:    ... okay on input line 24.
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 24.
 
-(/usr/share/texmf-texlive/tex/latex/psnfss/ot1ptm.fd
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
-*geometry auto-detecting driver*
-*geometry detected driver: pdftex*
--------------------- Geometry parameters
-paper: a4paper
-landscape: --
-twocolumn: --
-twoside: --
-asymmetric: --
-h-parts: 85.35826pt, 426.79135pt, 85.35826pt
-v-parts: 99.58464pt, 674.33032pt, 71.13188pt
-hmarginratio: --
-vmarginratio: --
-lines: --
-heightrounded: --
-bindingoffset: 0.0pt
-truedimen: --
-includehead: --
-includefoot: --
-includemp: --
-driver: pdftex
--------------------- Page layout dimensions and switches
-\paperwidth  597.50787pt
-\paperheight 845.04684pt
-\textwidth  426.79135pt
-\textheight 674.33032pt
-\oddsidemargin  13.08827pt
-\evensidemargin 13.08827pt
-\topmargin  -9.68535pt
-\headheight 12.0pt
-\headsep    25.0pt
-\footskip   30.0pt
-\marginparwidth 44.0pt
-\marginparsep   10.0pt
-\columnsep  10.0pt
-\skip\footins  10.8pt plus 4.0pt minus 2.0pt
-\hoffset 0.0pt
-\voffset 0.0pt
-\mag 1000
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(85.35826pt, 426.79135pt, 85.35826pt)
+* v-part:(T,H,B)=(99.58464pt, 674.33032pt, 71.13188pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=426.79135pt
+* \textheight=674.33032pt
+* \oddsidemargin=13.08827pt
+* \evensidemargin=13.08827pt
+* \topmargin=-9.68535pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=44.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-(1in=72.27pt, 1cm=28.45pt)
------------------------
-(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count97
-\scratchdimen=\dimen123
-\scratchbox=\box32
-\nofMPsegments=\count98
-\nofMParguments=\count99
+\scratchcounter=\count98
+\scratchdimen=\dimen130
+\scratchbox=\box35
+\nofMPsegments=\count99
+\nofMParguments=\count100
 \everyMPshowfont=\toks20
-\MPscratchCnt=\count100
-\MPscratchDim=\dimen124
-\MPnumerator=\count101
+\MPscratchCnt=\count101
+\MPscratchDim=\dimen131
+\MPnumerator=\count102
+\makeMPintoPDFobject=\count103
 \everyMPtoPDFconversion=\toks21
+) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <16> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 26.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
@@ -468,12 +534,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 26.
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 26.
- (/usr/share/texmf-texlive/tex/latex/psnfss/ot1pcr.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 LaTeX Font Info:    Try loading font information for OMS+pcr on input line 26.
 
-(/usr/share/texmf-texlive/tex/latex/psnfss/omspcr.fd
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omspcr.fd
 File: omspcr.fd 
 )
 LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <10> not available
@@ -484,7 +551,7 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <13> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 37.
 LaTeX Font Info:    Try loading font information for OMS+ptm on input line 49.
 
-(/usr/share/texmf-texlive/tex/latex/psnfss/omsptm.fd
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
@@ -527,57 +594,35 @@ Underfull \hbox (badness 3039) in paragraph at lines 126--127
  []
 
 [4] (./rel.bbl [5]
-Underfull \hbox (badness 4940) in paragraph at lines 88--94
+Underfull \hbox (badness 4940) in paragraph at lines 91--97
 []\OT1/ptm/m/n/12 Luke, S. (2009).  \OT1/ptm/m/it/12 Es-sen-ti-als of Me-taheu-
 ris-tics\OT1/ptm/m/n/12 .  Lulu.  Dis-pon[]^^Pvel em:
  []
 
-) [6] (./rel.aux) ) 
+[6]) [7] (./rel.aux) ) 
 Here is how much of TeX's memory you used:
-<<<<<<< HEAD
- 4594 strings out of 495039
- 62846 string characters out of 3181250
- 154098 words of memory out of 3000000
- 7699 multiletter control sequences out of 15000+200000
+ 4598 strings out of 495039
+ 62884 string characters out of 3181250
+ 154154 words of memory out of 3000000
+ 7703 multiletter control sequences out of 15000+200000
  18188 words of font info for 40 fonts, out of 3000000 for 9000
  16 hyphenation exceptions out of 8191
  38i,8n,28p,998b,320s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}<
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/c
-ourier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on rel.pdf (6 pages, 142552 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.en
+c}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/time
+s/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on rel.pdf (7 pages, 141065 bytes).
 PDF statistics:
- 72 PDF objects out of 1000 (max. 8388607)
- 51 compressed objects within 1 object stream
-=======
- 3650 strings out of 493848
- 46696 string characters out of 1152822
- 138087 words of memory out of 3000000
- 6878 multiletter control sequences out of 15000+50000
- 18188 words of font info for 40 fonts, out of 3000000 for 9000
- 714 hyphenation exceptions out of 8191
- 30i,8n,28p,1001b,321s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/
-share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf
--texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/font
-s/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/urw
-/courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb>
-</usr/share/texmf-texlive/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-t
-exlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/u
-rw/times/utmri8a.pfb>
-Output written on rel.pdf (5 pages, 113425 bytes).
-PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
->>>>>>> 3fb3c78dbecdb5f3b63b013cd2c96a1f99001ee5
+ 73 PDF objects out of 1000 (max. 8388607)
+ 52 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
