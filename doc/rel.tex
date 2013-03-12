@@ -120,8 +120,8 @@ O primeiro PGA foi proposto em 1987 por Pettey, Leuze e Grefenstette e utilizava
 \section{Experimentos} % (fold)
 \label{sec:experimentos}
 
-\subsubsection{Problema} % (fold)
-\label{ssub:problema}
+\subsection{Problema} % (fold)
+\label{sub:problema}
 
 Três funções de \emph{benchmark} da literatura foram escolhidas, duas definidas em \cite{dejong1975} e a função de Rastrigin. Aplicamos estas funções ao problema de minimização. As definições das funções foram extraídas de \cite{luke2005}.
 
@@ -152,13 +152,22 @@ Os códigos foram desenvolvido em C, com uso da biblioteca \emph{OpenMP} para pa
 
 % subsubsection problema (end)
 
-\subsubsection{Representação e Parâmetros} % (fold)
-\label{ssub:representacao}
+\subsection{Representação e Parâmetros} % (fold)
+\label{sub:representacao}
 
-Os casos de testes consistiam em achar um conjunto de elementos $(x_0, x_1, x_2, \dots x_n)$ que minimizasse as funções definidas na seção \ref{ssub:problema}.
+Os casos de testes consistiam em achar um conjunto de elementos $(x_0, x_1, x_2, \dots x_n)$ que minimizasse as funções definidas na seção \ref{sub:problema}.
 
-Utilizando o método definido em \cite[p. 3]{gasurvey}, 
+Utilizamos o método definido em \cite[p. 3]{gasurvey} para representar os números em ponto flutuante. Substituimos o valor do número pelo seu equivalente em inteiro, multiplicando por $10^p$, onde $p$ é o grau de precisão (casas decimais). Este número inteiro é então representado em uma \emph{string de bits}, em binário. Como as funções definidas em \ref{sub:problema} possuem domínio entre o intervalo $-5.12$ e $+5.12$, utilizamos uma \emph{string de bits $v$} de 10 posições, sendo a posição $v_0$ referente ao sinal, para cada número que queremos representar.
 
+O cruzamento dá-se de forma convencional: considere dois indivíduos $v$ e $q$ e $m$ o tamanho do indivíduo; os indivíduos $z$ e $w$, resultados do cruzamento de $v$ e $q$ serão:
+\[
+  z = [v_0, v_1, v_2, \dots, v_n, q_{n+1}, q_{n+2}, \dots q_m]
+\]
+\[
+   w = [q_0, q_1, q_2, \dots, q_n, v_{n+1}, v_{n+2}, \dots v_m]
+\]
+Onde $n$ é um valor escolhido de forma aleatória, $ 0 \le n \le m$.
+A taxa de cruzamento é de 100\%.
 % subsubsection modelagem (end)
 
 
