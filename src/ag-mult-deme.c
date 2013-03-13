@@ -60,7 +60,7 @@ typedef struct population {
 /** Define initial parameters **/
 #define MAX_POP_SIZE 100
 #define IND_SIZE 50
-#define MAX_GENERATIONS 3000
+#define MAX_GENERATIONS 1000
 #define TOURNAMENT 4
 #define MUTATION_PROB 0.1
 
@@ -211,7 +211,7 @@ int is_best(individual i, individual candidate) {
   cand = (cand < 0) ? -1 * cand : cand;
   
   if (cand < ind) {
-    /*printf("Individuo melhor. Cand: %.7lf Ind: %.7lf\n", cand, ind);*/
+    // printf("Individuo melhor. Cand: %.7lf Ind: %.7lf\n", cand, ind);
     return 1;
   } else {
     return 0;
@@ -419,7 +419,7 @@ int main(int argc, char **argv) {
   		}
   		
 
-      for(i = 0; i < (breed -1); i++) {
+      for(i = 0; i < breed; i++) {
         individual c1, c2;
         individual* tournament = applyTournament(pop);
 
@@ -437,12 +437,9 @@ int main(int argc, char **argv) {
         free(tournament);
       }
 
-      individual c_best1;
-      individual c_best2;
-
       //Crossover best individuals of processor i with i + 1
       //if the fitness of generated individual is worse than best indivual of processor i do not put this in the population
-      if (tid == 0) {
+      /*if (tid == 0) {
         applyCrossover(&c_best1, &c_best2, popsize, best, best2);
 
         if (is_best(c_best1, best)) {
@@ -482,14 +479,12 @@ int main(int argc, char **argv) {
         if (is_best(c_best2, best1)) {
           cloneIndividual(&c_best2, best1);
         } 
-      }
+      }*/
 
 
-      cloneIndividual(&q.i[(popsize - 2)], c_best1);
+      /*cloneIndividual(&q.i[(popsize - 2)], c_best1);
       cloneIndividual(&q.i[(popsize - 1)], c_best2);
-      free(c_best1.v);free(c_best2.v);
-
-
+      free(c_best1.v);free(c_best2.v);*/
 
       popfree(&pop, popsize);
   		pop = q;
@@ -500,6 +495,7 @@ int main(int argc, char **argv) {
   			  cloneIndividual(&best, pop.i[i]);
           fbest = fitness(best);
           best_generation = generation;
+
           if (tid == 0) {
             cloneIndividual(&best1, best);
           }
@@ -515,39 +511,39 @@ int main(int argc, char **argv) {
     		}
   	  }
 
-      printPop(pop);
+      if (tid == 0) {
+        pop1 = pop;
+        //printPop(pop1);
+      }
+      else if (tid == 1){
+        pop2 = pop;
+      }
+      else if (tid == 2){
+        pop3 = pop;
+      }
+      else if (tid == 3){
+        pop4 = pop;
+      }
+      // printPop(pop);
   	}
 
     if (tid == 0) {
-      generation1 = generation;
+      generation1 = best_generation;
     }
     else if (tid == 1){
-      generation2 = generation;
+      generation2 = best_generation;
     }
     else if (tid == 2){
-      generation3 = generation;
+      generation3 = best_generation;
     }
     else if (tid == 3){
-      generation4 = generation;
+      generation4 = best_generation;
     } 
 	}
 
   //Catch the best individual of all processors
   cloneIndividual(&best_all, best1);
   best_ind_generation = generation1;
-
-/*  if (fitness(best2) > fitness(best_all) && fitness(best2) > fitness(best3) && fitness(best2) > fitness(best4)) {
-    cloneIndividual(&best_all, best2);
-    best_ind_generation = generation2;
-  }
-  else if (fitness(best3) > fitness(best_all) && fitness(best3) > fitness(best2) && fitness(best3) > fitness(best4)) {
-    cloneIndividual(&best_all, best3);
-    best_ind_generation = generation3;
-  }
-  else if (fitness(best4) > fitness(best_all) && fitness(best4) > fitness(best2) && fitness(best4) > fitness(best3)) {
-    cloneIndividual(&best_all, best4);
-    best_ind_generation = generation4;
-  }*/
 
   if (is_best(best_all, best2) && is_best(best3, best2) && is_best(best4, best2)) {
     cloneIndividual(&best_all, best2);
@@ -561,6 +557,11 @@ int main(int argc, char **argv) {
     cloneIndividual(&best_all, best4);
     best_ind_generation = generation4;
   }
+
+  printPop(pop1);
+  printPop(pop2);
+  printPop(pop3);
+  printPop(pop4);
 
   printf("best single individuo: ");
   printIndividual(best_all);
