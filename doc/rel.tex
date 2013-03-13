@@ -97,7 +97,7 @@ A maneira com que os GAs são paralelizados depende dos seguintes elementos \cit
 
 Dos parâmetros acima, pode-se extrair quatro tipos principais de PGA \cite{cantu1998}: 
 \begin{itemize}
-  \item Mestre-escravo: globais de uma única população;
+  \item Mestre-escravo \emph{(Master Slave)}: globais de uma única população;
   \item Única população com paralelização \emph{fine-grained};
   \item Múltiplas populações com paralelização \emph{coarsed-grained} e;
   \item Combinação dos métodos acima
@@ -182,22 +182,93 @@ e a propabilidade de mutação $p = 0.01$, ou seja, 1\%.
 
 O método de seleção para o cruzamento escolhido foi o \emph{Torneio}. A cada iteração, são selecionados quatro indivíduos da população aleatoriamente e os dois indivíduos com maior \emph{fitness} são então escolhidos para gerar os filhos. A cada geração, toda a população, salvo o melhor indivíduo, é substituida pela nova população gerada.
 
-A tabela \ref{tab:param} resume os métodos acima explicitados.
+O tamanho da população foi fixado em 400 indivíduos. O tamanho do indivíduo depende do $n$ das funções. Para as funções \ref{eq:spher} e \ref{eq:step}, $n = 2$, logo, o tamanho do indivíduo é $20$ ($2 \times 10$, já que cada número ocupa 10 \emph{bits}). Já para a função \ref{eq:rast}, $n = 20$, fazendo com que o tamanho do indivíduo seja $200$ ($20 \times 10$). O número total de gerações foi $3000$.
+
+
+As tabelas \ref{tab:met} e \ref{tab:param} resume os parâmetros e métodos acima explicitados.
 
 \begin{table} 
-\centering
-\begin{tabular}{|l|c|c|}
-\hline 
-\textbf{Parâmetro} & \textbf{Método} & \textbf{Taxa}\\ \hline
-Mutação & Negação de \emph{bits} & 1\% \\ \hline
-Cruzamento & \emph{One-point crossover} & 100\%  \\ \hline
-Seleção & Torneio  \\ \cline{0-1}
-Elitismo & Apenas o melhor \\ \cline{0-1}
-\end{tabular}
-\caption{Parâmetros dos GAs}
-\label{tab:param}
+  \centering
+  \begin{tabular}{l|c|c|}
+    \cline{2-3} 
+    & \textbf{Método} & \textbf{Taxa}\\ \hline
+    \multicolumn{1}{|l|}{Mutação} & Negação de \emph{bits} & 1\% \\ \hline
+    \multicolumn{1}{|l|}{Cruzamento} & \emph{One-point crossover} & 100\%  \\ \hline
+    \multicolumn{1}{|l|}{Seleção} & Torneio  \\ \cline{0-1}
+    \multicolumn{1}{|l|}{Elitismo} & Apenas o melhor \\ \cline{0-1}
+  \end{tabular}
+  \caption{Métodos dos GAs}
+  \label{tab:met}
 \end{table}
+
+\begin{table} 
+  \centering
+  \begin{tabular}{l|c|c|c|}
+    \cline{2-4} 
+     & \multicolumn{3}{|c|}{Função} \\ \hline
+    \multicolumn{1}{|l|}{\textbf{Parâmetro}} & \textbf{F1} & \textbf{F2} & \textbf{F3} \\ \hline
+    \multicolumn{1}{|l|}{Tamanho do indivíduo} & 20 & 20 & 200 \\ \hline
+    \multicolumn{1}{|l|}{Tamanho da população} & \multicolumn{3}{|c|}{400} \\ \hline
+    \multicolumn{1}{|l|}{Número de Gerações} & \multicolumn{3}{|c|}{3000} \\ \hline
+  \end{tabular}
+  \caption{Parâmetros dos GAs}
+  \label{tab:param}
+\end{table}
+
+\subsection{Algoritmos} % (fold)
+\label{sub:algoritmos}
+
+
+\subsubsection{GA Sequencial} % (fold)
+\label{ssub:ga_sequencial}
+
+O GA sequencial foi desenvolvido conforme descrito em \cite{holland1975}, com adição do elitismo \cite{dejong1975} de apenas um (o melhor da geração) indivíduo.
+
+% subsubsection ga_sequencial (end)
+
+\subsubsection{PGA Mestre-escravo} % (fold)
+\label{ssub:pga_slave}
+
+Na nossa implementação, foi paralelizado tanto a geração de uma nova população quanto o cálculo da função de \emph{fitness} dos indivíduos gerados. A \emph{thread master} distribui para as \emph{threads slaves} uma faixa de índices, onde serão armazenados os filhos gerados por cada uma destas \emph{threads}. Após toda a população ter sido gerada, a \emph{thread master} novamente distribui para as \emph{slaves} uma faixa de índices para que estas calculem o \emph{fitness} dos indivíduos dentro desta faixa.
+
+É importante notar que, no primeiro caso, os indivíduos gerados pelas \emph{slaves} são inseridos diretamente na nova população, enquanto que no cálculo de \emph{fitness} cada \emph{slave} retorna o melhor indivíduo encontrado naquela faixa de valores, e cabe a \emph{master} decidir qual é o melhor indivíduo entre eles.
+
+Os demais parâmtros permaneceram inalterados.
+
+% subsubsection pga_slave (end)
+
+\subsubsection{PGA Multiplas Populações} % (fold)
+\label{ssub:pga_mp}
+
+Na implementação do \emph{Multi-Demme} PGA, cada \emph{thread} possui uma instância do GA sequencial, com sua própria população. Neste caso, para que todas as populações se beneficiem da evolução de outra, implementamos a migração: considere o conjunto de populações $\mathrm{P} = \lbrace p_0, p_1, \dots, p_n \rbrace$, onde $p_i$ é a população da \emph{thread} $i$. A cada $g$ gerações, o melhor indivíduo da população $p_i$ migra para a população $p_{i+1}$ (no caso de $i+1 = n$, o indivíduo migra para $p_0$).
+
+Além disso, foi diminuido o número de gerações em cada sub-população proporcionalmente ao número de \emph{threads} disponíveis, para que todos os GAs tivessem o mesmo gasto no cálculo da função \emph{fitness}.
+
+% subsubsection pga_mp (end)
+
+\subsubsection{PGA Hierárquico} % (fold)
+\label{ssub:pga_h}
+
+Utilizando como base o PGA descritos em \ref{ssub:pga_mp} e em \ref{ssub:pga_slave}, foi implementado uma versão híbrida de ambos. O algoritmo hierárquico é separado em camadas: na camada mais externa (\emph{top layer}) é executado exatamente o mesmo algoritmo descrito em \ref{ssub:pga_mp}. Entretanto, cada população executa o GA descrito em \ref{ssub:pga_mp}, ou seja, cada sub-população paraleliza a geração de uma nova população e do cálculo da função \emph{fitness}.
+
+Desta forma, procura-se acelerar a velocidade de execução (através do \emph{master-slave}) ao mesmo tempo que explora-se melhor o espaço de busca (através do \emph{multi-demme}).
+
+\subsection{Resultados} % (fold)
+\label{sub:resultados}
+
+% subsection resultados (end)
+
+% subsubsection pg_h (end)
+
+% subsection algoritmos (end)
+
 % subsubsection modelagem (end)
+
+\section{Conclusão} % (fold)
+\label{sec:conclusao}
+
+% section conclus_o (end)
+
 
 
 % Esboço: Comparação entre ag tradicional, ag paralelo com multiplas populações, ag paralelo master slave e ag hibrido das duas anteriores.
