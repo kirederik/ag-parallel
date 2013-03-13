@@ -159,25 +159,54 @@ Os casos de testes consistiam em achar um conjunto de elementos $(x_0, x_1, x_2,
 
 Utilizamos o método definido em \cite[p. 3]{gasurvey} para representar os números em ponto flutuante. Substituimos o valor do número pelo seu equivalente em inteiro, multiplicando por $10^p$, onde $p$ é o grau de precisão (casas decimais). Este número inteiro é então representado em uma \emph{string de bits}, em binário. Como as funções definidas em \ref{sub:problema} possuem domínio entre o intervalo $-5.12$ e $+5.12$, utilizamos uma \emph{string de bits $v$} de 10 posições, sendo a posição $v_0$ referente ao sinal, para cada número que queremos representar.
 
-O cruzamento dá-se de forma convencional: considere dois indivíduos $v$ e $q$ e $m$ o tamanho do indivíduo; os indivíduos $z$ e $w$, resultados do cruzamento de $v$ e $q$ serão:
+O cruzamento dá-se de forma convencional, pelo método \emph{One-point Crossover}: considere dois indivíduos $v$ e $q$ e $m$ o tamanho do indivíduo; os indivíduos $z$ e $w$, resultados do cruzamento de $v$ e $q$ serão:
 \[
   z = [v_0, v_1, v_2, \dots, v_n, q_{n+1}, q_{n+2}, \dots q_m]
 \]
 \[
    w = [q_0, q_1, q_2, \dots, q_n, v_{n+1}, v_{n+2}, \dots v_m]
 \]
-Onde $n$ é um valor escolhido de forma aleatória, $ 0 \le n \le m$.
+Onde $n$ é um valor escolhido de forma aleatória, $ 0 \le n < m$.
 A taxa de cruzamento é de 100\%.
+
+A mutação também é realizada da forma clássica: seja $v$ um indivíduo. Para todo $x_i \in v$, com probabilidade $p$, faça $x_i = \overline{x_i}$, onde:
+ \begin{displaymath}
+   \overline{x_i} = \left\{
+     \begin{array}{lr}
+       0 & : x_i = 1 \\
+       1 & : x_i = 0
+     \end{array}
+   \right.
+\end{displaymath} 
+e a propabilidade de mutação $p = 0.01$, ou seja, 1\%. 
+
+O método de seleção para o cruzamento escolhido foi o \emph{Torneio}. A cada iteração, são selecionados quatro indivíduos da população aleatoriamente e os dois indivíduos com maior \emph{fitness} são então escolhidos para gerar os filhos. A cada geração, toda a população, salvo o melhor indivíduo, é substituida pela nova população gerada.
+
+A tabela \ref{tab:param} resume os métodos acima explicitados.
+
+\begin{table} 
+\centering
+\begin{tabular}{|l|c|c|}
+\hline 
+\textbf{Parâmetro} & \textbf{Método} & \textbf{Taxa}\\ \hline
+Mutação & Negação de \emph{bits} & 1\% \\ \hline
+Cruzamento & \emph{One-point crossover} & 100\%  \\ \hline
+Seleção & Torneio  \\ \cline{0-1}
+Elitismo & Apenas o melhor \\ \cline{0-1}
+\end{tabular}
+\caption{Parâmetros dos GAs}
+\label{tab:param}
+\end{table}
 % subsubsection modelagem (end)
 
 
-Esboço: Comparação entre ag tradicional, ag paralelo com multiplas populações, ag paralelo master slave e ag hibrido das duas anteriores.
+% Esboço: Comparação entre ag tradicional, ag paralelo com multiplas populações, ag paralelo master slave e ag hibrido das duas anteriores.
 
-Problema: funções de de jong.
+% Problema: funções de de jong.
 
-Modelagem: Vetor de números reais. Cruzamento convencional. Mutação: pequena soma/subtração de número entre 0.01 e 0.05. Seleção torneio.
+% Modelagem: Vetor de números reais. Cruzamento convencional. Mutação: pequena soma/subtração de número entre 0.01 e 0.05. Seleção torneio.
 
-Análise: tabelas: tempo gasto, resultado médio em 10 execuções para cada um dos ag's, ótimo conhecido. Gráfico: fitness x geração, testes: kruskal-wallis e/ou analise de covariancia (ancova).
+% Análise: tabelas: tempo gasto, resultado médio em 10 execuções para cada um dos ag's, ótimo conhecido. Gráfico: fitness x geração, testes: kruskal-wallis e/ou analise de covariancia (ancova).
 
 % section experimentos (end)
 \bibliographystyle{sbc}
