@@ -377,7 +377,7 @@ int main(int argc, char **argv) {
 	    //fitness(pop.i[0]);
 	    // printf("\nfitness: %lf\n", fitness(pop.i[0]));
 	    // printIndividual(pop.i[0]);
-	  #pragma omp parallel for shared(q, popsize, breed, pop) private(i, j) schedule(dynamic)
+	  #pragma omp parallel for shared(q, popsize, breed, pop) private(i, j) schedule(static)
 	    for(i = 0; i < popsize; i += 2) {
         
         // if (!control) {

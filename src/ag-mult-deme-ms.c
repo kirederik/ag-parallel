@@ -362,9 +362,11 @@ int main(int argc, char **argv) {
     puts("Memory Error");
     exit(1);
   }
-  omp_set_num_threads(4);
+
   //Create threads based on number of cores with OpenMP
-  #pragma omp parallel shared(pop1, pop2, pop3, pop4, best1, best2, best3, best4, generation1, generation2, generation3, generation4, best_all)
+  //omp_set_num_threads(2);
+  omp_set_nested(1);
+  #pragma omp parallel shared(pop1, pop2, pop3, pop4, best1, best2, best3, best4, generation1, generation2, generation3, generation4, best_all) num_threads(4)
   {
 
     int tid = omp_get_thread_num();
@@ -418,24 +420,27 @@ int main(int argc, char **argv) {
   			exit(1);
   		}
   		
+      //printf("For Externo Tid = %d\n", omp_get_thread_num());
 
-      for(i = 0; i < breed; i++) {
-        individual c1, c2;
-        individual* tournament = applyTournament(pop);
+      #pragma omp parallel for shared(q, popsize, breed, pop) private(i, j) schedule(dynamic) num_threads(2)
+        for(i = 0; i < popsize; i += 2) {
+          //printf("For Interno Tid = %d I = %d\n", omp_get_thread_num(), i);
+          individual c1, c2;
+          individual* tournament = applyTournament(pop);
 
-        applyCrossover(&c1, &c2, popsize, *tournament, *(tournament + 1));
+          applyCrossover(&c1, &c2, popsize, *tournament, *(tournament + 1));
 
-        /*applyCrossover(&c1, &c2, popsize, getIndividual(pop), getIndividual(pop));*/
+          /*applyCrossover(&c1, &c2, popsize, getIndividual(pop), getIndividual(pop));*/
 
-        mutate(&c1);
-        mutate(&c2);
+          mutate(&c1);
+          mutate(&c2);
 
 
-        cloneIndividual(&q.i[j++], c1);
-        cloneIndividual(&q.i[j++], c2);
-        free(c1.v); free(c2.v);  
-        free(tournament);
-      }
+          cloneIndividual(&q.i[i], c1);
+          cloneIndividual(&q.i[i + 1], c2);
+          free(c1.v); free(c2.v);  
+          free(tournament);
+        }
 
       //Crossover best individuals of processor i with i + 1
       //if the fitness of generated individual is worse than best indivual of processor i do not put this in the population
