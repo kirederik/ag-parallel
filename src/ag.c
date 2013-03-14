@@ -58,7 +58,7 @@
 
 /** Define initial parameters **/
 #define MAX_POP_SIZE 400
-#define IND_SIZE 5
+#define IND_SIZE 50
 #define MAX_GENERATIONS 1000
 #define TOURNAMENT 4
 #define MUTATION_PROB 1
@@ -178,6 +178,7 @@ double fitness(individual ind) {
  	double sum = 0;
  	for(i = 0; i < IND_SIZE; i++) {
 		/*sum += (ind.v[i] * ind.v[i] - 10 * cos(10 * M_PI * ind.v[i])) ; //f(x) = sum(x^2)*/
+		for
 		sum +=  (ind.v[i] * ind.v[i] );
 	}
 	return sum;

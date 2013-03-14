@@ -170,13 +170,16 @@ int binToDec(int i, individual ind) {
 
 /** Apply the fitness function **/
 double fitness(individual ind) {
-  int i;
-  double sum = 0;
+  int i,j;
+  double sum = 0, sumj = 0;
   for(i = 0; i < IND_SIZE; i+=10) {
-    double v = binToDec(i, ind)/100.0;
+    for (j = 0; j < i; j+= 10)  {
+      double v = binToDec(j, ind)/100.0;
+      sumj += (v*v);
+    }
+    sum += sumj;
     /*sum += v * v;*/
     /*sum += ((v * v) - 10 * cos(M_PI * 10 * v));*/
-    sum += floor(v);
   }
   /*return 10 * 5 + sum;*/
   return sum;

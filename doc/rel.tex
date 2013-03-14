@@ -131,10 +131,10 @@ A primeira função de \cite{dejong1975}, a Função Esfera (\emph{Sphere Functi
   f(Sphere) = \sum_{i = 1}^{n} x_{i}^2
 \end{equation}
 
-A segunda função de \cite{dejong1975}, a Função \emph{Step} (\emph{Step Function}) contêm múltiplos \emph{plateaux}. Indivíduos no mesmo \emph{plateau} tem \emph{fitness} equivalentes, o que pode significamente diminuir a velocidade de convergência de algoritmos de otimização. O valor de $x$ varia entra $-5.12$ e $+5.12$.
+A segunda função utilizada foi a Função \emph{Rotated Hyper-ellipsoid function} é continua, convexa e unimodal. O valor de $x$ varia entra $-5.12$ e $+5.12$.
 
 \begin{equation} \label{eq:step}
-  f(Step) = \sum_{i = 1}^{n} \lfloor x_{i} \rfloor
+  f(Step) = \sum_{i = 1}^{n}\sum_{j=1}^{i} x_j^2
 \end{equation}
 
 A função de Rastrigin é outro problema muito difícil já que define um espaço de busca muito grande, com $n = 20$ com valores entre $-5.12$ e $+5.12$. Além disso, possui muitos ótimos locais. Esta combinação faz com que muitos algoritmos possuam grande dificuldade para encontrar a solução ótima. As variáveis $A$ e $\omega$ controlam a frequencia e modulação do espaço de busca. No estudo feito, $A = 10$ e $\omega = 2\pi$;
@@ -182,7 +182,7 @@ e a propabilidade de mutação $p = 0.01$, ou seja, 1\%.
 
 O método de seleção para o cruzamento escolhido foi o \emph{Torneio}. A cada iteração, são selecionados quatro indivíduos da população aleatoriamente e os dois indivíduos com maior \emph{fitness} são então escolhidos para gerar os filhos. A cada geração, toda a população, salvo o melhor indivíduo, é substituida pela nova população gerada.
 
-O tamanho da população foi fixado em 400 indivíduos. O tamanho do indivíduo depende do $n$ das funções. Para as funções \ref{eq:spher} e \ref{eq:step}, $n = 2$, logo, o tamanho do indivíduo é $20$ ($2 \times 10$, já que cada número ocupa 10 \emph{bits}). Já para a função \ref{eq:rast}, $n = 20$, fazendo com que o tamanho do indivíduo seja $200$ ($20 \times 10$). O número total de gerações foi $3000$.
+O tamanho da população foi fixado em 400 indivíduos. O tamanho do indivíduo depende do $n$ das funções. Para as funções \ref{eq:spher} e \ref{eq:step}, $n = 5$, logo, o tamanho do indivíduo é $20$ ($2 \times 10$, já que cada número ocupa 10 \emph{bits}). Já para a função \ref{eq:rast}, $n = 20$, fazendo com que o tamanho do indivíduo seja $200$ ($20 \times 10$). O número total de gerações foi $3000$.
 
 
 As tabelas \ref{tab:met} e \ref{tab:param} resume os parâmetros e métodos acima explicitados.
@@ -280,6 +280,55 @@ Os resultados podem ser analisados olhando os gráficos das 10 execuções dos G
   \centering
   \includegraphics[width=0.8\textwidth]{msmd_f1.png}
   \caption{GA \emph{Multi-demme Master-Slave} - Função \emph{Sphere}}
+\end{figure}
+
+
+\begin{figure}[hp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{seq_f2.png}
+  \caption{GA Sequencial - Função \emph{Rotated Hyper-ellipsoid}}
+\end{figure}
+
+\begin{figure}[hp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{ms_f2.png}
+  \caption{GA \emph{Master-slave} - Função \emph{Rotated Hyper-ellipsoid}}
+\end{figure}
+
+\begin{figure}[hp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{md_f2.png}
+  \caption{GA \emph{Multi-demme} - Função \emph{Rotated Hyper-ellipsoid}}
+\end{figure}
+
+\begin{figure}[hp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{mdms_f2.png}
+  \caption{GA \emph{Multi-demme Master-Slave} - Função \emph{Rotated Hyper-ellipsoid}}
+\end{figure}
+
+\begin{figure}[hp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{seq_f3.png}
+  \caption{GA Sequencial - Função \emph{Rastrigin}}
+\end{figure}
+
+\begin{figure}[hp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{ms_f3.png}
+  \caption{GA \emph{Master-slave} - Função \emph{Rastrigin}}
+\end{figure}
+
+\begin{figure}[hp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{md_f3.png}
+  \caption{GA \emph{Multi-demme} - Função \emph{Rastrigin}}
+\end{figure}
+
+\begin{figure}[hp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{mdms_f3.png}
+  \caption{GA \emph{Multi-demme Master-Slave} - Função \emph{Rastrigin}}
 \end{figure}
 
 

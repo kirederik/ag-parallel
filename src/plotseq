@@ -1,14 +1,14 @@
 set xtic auto
 set ytic auto
-set title "GA Multi-Demme Master Slave"
-set xlabel "Gerações \n\n Tempo médio: 13s"
+set title "GA Sequencial"
+set xlabel "Gerações \n\n Tempo médio: 34s"
 set ylabel "Fitness"
 set key bottom right
 set key box
 set autoscale
-set xrange [0:30]
+set xrange [0:500]
 set grid
 set terminal png
-set output "mdms_f3.png"
+set output "seq_f2.png"
 set nokey
-plot "run-msmd0" using 1:2 with lines,"run-msmd1" using 1:2 with lines,"run-msmd2" using 1:2 with lines,"run-msmd3" using 1:2 with lines,"run-msmd4" using 1:2 with lines,"run-msmd5" using 1:2 with lines,"run-msmd6" using 1:2 with lines,"run-msmd7" using 1:2 with lines,"run-msmd8" using 1:2 with lines,"run-msmd9" using 1:2 with lines
+plot "run0" using 1:2 with lines,"run1" using 1:2 with lines,"run2" using 1:2 with lines,"run3" using 1:2 with lines,"run4" using 1:2 with lines,"run5" using 1:2 with lines,"run6" using 1:2 with lines,"run7" using 1:2 with lines,"run8" using 1:2 with lines,"run9" using 1:2 with lines
