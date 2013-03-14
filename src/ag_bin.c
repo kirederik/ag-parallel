@@ -56,9 +56,11 @@ typedef struct population {
 	individual *i;
 } population;
 
+long totalfitness;
+
 /** Define initial parameters **/
 #define MAX_POP_SIZE 400
-#define IND_SIZE 20
+#define IND_SIZE 50
 #define MAX_GENERATIONS 3000
 #define TOURNAMENT 4
 #define MUTATION_PROB 0.1
@@ -125,19 +127,19 @@ double fitness(individual ind) {
 	double sum = 0;
 	for(i = 0; i < IND_SIZE; i+=10) {
 		double v = binToDec(i, ind)/100.0;
-		sum += v * v;
+		/*sum += v * v;*/
 		/*sum += ((v * v) - 10 * cos(M_PI * 2 * v));*/
+		/*printf("floor %lf %lf", v, floor(v));*/
+		sum += floor(v);
 	}
 	/*return 10 * 20 + sum;*/
+	/*totalfitness += sum;*/
 	return sum;
 }
 
 
 void printIndividual(individual p) {
 	int i;
-	if (fitness(p) == 0) {
-		printf("-------->");
-	}
 	for(i = 0; i < IND_SIZE; i+= 10) {
 		printf("%.2lf ", binToDec(i, p)/100.0);
 			/*printf("%d ",p.v[i]);*/
@@ -332,11 +334,11 @@ int main(int argc, char **argv) {
 
 	for (generation = 0; generation < MAX_GENERATIONS; generation++) {
 		int i, j = 0;		
-		// population q;
-		// if(!popalloc(&q, popsize)) {
-		// 	puts("Memory Error");
-		// 	exit(1);
-		// }
+		population q;
+		if(!popalloc(&q, popsize)) {
+			puts("Memory Error");
+			exit(1);
+		}
 
 		for(i = 0; i < breed; i++) {
 			individual c1, c2;
@@ -350,15 +352,19 @@ int main(int argc, char **argv) {
 			mutate(&c2);
 
 
-			cloneIndividual(&pop.i[j++], c1);
-			cloneIndividual(&pop.i[j++], c2);
+			cloneIndividual(&q.i[j++], c1);
+			cloneIndividual(&q.i[j++], c2);
 			free(c1.v); free(c2.v);  
 			free(tournament);
 		}
 
-		// popfree(&pop, popsize);
-		// pop = q;
-
+		for (i = 0; i < 40; i++) {
+			if (is_best(pop.i[i], q.i[i])) {
+				cloneIndividual(&q.i[0], pop.i[i]);
+			}
+		}
+		popfree(&pop, popsize);
+		pop = q;
 		if(is_best(pop.i[0], best))  {   
 			cloneIndividual(&pop.i[0], best);
 		} else {
@@ -372,14 +378,18 @@ int main(int argc, char **argv) {
 				best_generation = generation;
 			}
 		}
+		printf("%d\t%lf\n", generation, 1-fitness(best));
+		totalfitness = 0;
 
 	} 
 	//printPop(pop);
+	puts("");
 	printf("best single individual: ");
 	printIndividual(best);
 	printf("\nfitness: %lf\n", fitness(best));
 	printf("generation: %d\n", generation);
 	printf("generation of best ind: %d\n", best_generation);
+	puts("");
 
 	return 0;
 }

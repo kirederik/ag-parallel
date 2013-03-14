@@ -174,18 +174,17 @@ double fitness(individual ind) {
   double sum = 0;
   for(i = 0; i < IND_SIZE; i+=10) {
     double v = binToDec(i, ind)/100.0;
-    sum += v * v;
-    // sum += ((v * v) - 10 * cos(M_PI * 10 * v));
+    /*sum += v * v;*/
+    /*sum += ((v * v) - 10 * cos(M_PI * 10 * v));*/
+    sum += floor(v);
   }
-  // return 10 * 5 + sum;
+  /*return 10 * 5 + sum;*/
   return sum;
+
 }
 
 void printIndividual(individual p) {
   int i;
-  if (fitness(p) == 0) {
-    printf("-------->");
-  }
   for(i = 0; i < IND_SIZE; i+= 10) {
     printf("%.2lf ", binToDec(i, p)/100.0);
       /*printf("%d ",p.v[i]);*/
@@ -515,6 +514,9 @@ int main(int argc, char **argv) {
           }
     		}
   	  }
+      if (tid == 0) {
+        printf("%d\t%lf\n", generation, 1-fitness(best));
+      }
 
       if (tid == 0) {
         pop1 = pop;
@@ -563,10 +565,6 @@ int main(int argc, char **argv) {
     best_ind_generation = generation4;
   }
 
-  printPop(pop1);
-  printPop(pop2);
-  printPop(pop3);
-  printPop(pop4);
 
   printf("best single individuo: ");
   printIndividual(best_all);

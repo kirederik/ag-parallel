@@ -59,7 +59,7 @@ typedef struct population {
 
 /** Define initial parameters **/
 #define MAX_POP_SIZE 100
-#define IND_SIZE 20
+#define IND_SIZE 50
 #define MAX_GENERATIONS 3000
 #define TOURNAMENT 4
 #define MUTATION_PROB 0.1
@@ -125,8 +125,9 @@ double fitness(individual ind) {
 	double sum = 0;
 	for(i = 0; i < IND_SIZE; i+=10) {
 		double v = binToDec(i, ind)/100.0;
-		sum += v * v;
+		/*sum += v * v;*/
 		/*sum += ((v * v) - 10 * cos(M_PI * 2 * v));*/
+    sum += floor(v);
 	}
 	/*return 10 * 20 + sum;*/
 	return sum;
@@ -407,7 +408,15 @@ int main(int argc, char **argv) {
 	      free(c1.v); free(c2.v);  
 	      free(tournament);
 	    }
-			
+		
+    for(i = 1; i < popsize; i++) {
+      if(is_best(best, pop.i[i]))  {      
+        //puts("opa");    
+        cloneIndividual(&best, pop.i[i]);
+        fbest = fitness(best);
+        best_generation = generation;
+      }
+    }
     popfree(&pop, popsize);
     pop = q;
 
@@ -444,6 +453,8 @@ int main(int argc, char **argv) {
     if(is_best(best, cand_best)) {
       cloneIndividual(&best, cand_best);
     }
+    printf("%d\t%lf\n", generation, 1-fitness(best));
+
 	}
 
 
