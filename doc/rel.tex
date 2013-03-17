@@ -26,11 +26,11 @@
 \maketitle
 
 \begin{abstract}
-  @TODO Abstract
+    The Genetic Algorithm has been successfully applied in several applications, in different domains. However, there are some problems that may make it impratical to use: a)  when the population has to be arbitrary large, becoming  impossible to execute in a single machine; b) very large execution time; c) difficulty to escape of suboptimal areas in the search space and, consequently, turning hard to find the global optimal. This problemas can be solved (or, at least, minimized) using a parallel version of the algorithm. In this paper, we explore some of the most common parallelization tecniches applied to genetic algorithm: the multiple population model and the master-slave model. Further, we explore a hierarchical model, that parallelized the process in two levels: in the superior layer, it uses a multiple populations approach and in the lower layer, a master-slave approach. The results are then compared. 
 \end{abstract}
      
 \begin{resumo} 
-  @TODO Resumo
+  O Algoritmo genético tem tido sucesso e dado bons resultados em muitas aplicações de diferentes domínios do conhecimento. Entretanto, existem alguns problemas que podem tornar inviáveis o uso deste algoritmo: a) a necessidade de uma população arbitrariamente grande, podendo impossibilitar a utilização eficiente; b) tempo de execução muito grande; c) dificuldade do algoritmo de escapar de regiões sub-ótimas no espaço de busca, impossibilitanto a descoberta da solução ótima. Estes problemas podem ser solucionados (ou minimizados) utilizando paralelismo. Neste trabalho, exploramos algumas das técnicas mais comuns de paralelização: utilização de multiplas populações (multi-demme) e paralelização dos cálculos de fitnesse e geração de nova população (master-slave). Além disso, exploramos um método hierárquico, que paraleliza o processo em dois níveis: no nível superior, paraleliza-se utilizando um algoritmo multi-demme, enquanto no nível inferior, utiliza-se um modelo master-slave. Os diferentes algoritmos são comparados no problema de minimização de funções.
 \end{resumo}
 
 
@@ -256,7 +256,13 @@ Desta forma, procura-se acelerar a velocidade de execução (através do \emph{m
 \subsection{Resultados} % (fold)
 \label{sub:resultados}
 
-Os resultados podem ser analisados olhando os gráficos das 10 execuções dos GAs. Nos gráficos do GA \emph{Multi-demme} e \emph{Multi-demme master-slave} é moestrado apenas o melhor \emph{fitness} de uma das populações.
+Os resultados podem ser analisados olhando os gráficos das 10 execuções dos GAs. Nos gráficos do GA \emph{Multi-demme} e \emph{Multi-demme master-slave} é moestrado apenas o melhor \emph{fitness} de uma das populações, pela dificuldade encontrada em inserir todas as populações no mesmo gráfico.
+
+Para a função \ref{eq:spher}, podemos perceber que o ganho das abordagens paralelas em relação ao sequencial não foi grande, pelo fato do problema ser relativamente simples. Ao analisar o ganho de tempo dos GAs com a abordagem \emph{multi demme}, é importante lembrar que nestes foram feitas apenas 1/4 das gerações que nos outros (para manter o mesmo número de avaliações da função de \emph{fitness}).
+
+Para a função \ref{eq:step} o mesmo se aplica: a solução encontrada pelo sequencial foi equivalente a solução encontrada pelas abordagens paralelas. Entretanto, o ganho em tempo foi alto.
+
+Já para a função \ref{eq:rast}, as abordagens com multiplas populações tiveram um resultado muito melhor do que o sequencial ou a paralelização \emph{master-slave} (que apenas paraleliza as operações do GA sequencial, trazendo ganhos apenas temporais). Isso se deve ao fato desta função ser muito mais complexa que as anteriores, com um espaço de busca muito maior, permitindo que cada subpopulação explore uma região deste espaço. O tempo de execução da abordagem hierárquica foi pior do que o do GA \emph{multi-demme} pois precisamos simular o paralelismo daquele, já que não tinhamos a disposição uma máquina com a quantidade de núcleos necessários para ter ganhos reais de tempo.
 
 \begin{figure}[hp]
   \centering
@@ -281,7 +287,6 @@ Os resultados podem ser analisados olhando os gráficos das 10 execuções dos G
   \includegraphics[width=0.8\textwidth]{msmd_f1.png}
   \caption{GA \emph{Multi-demme Master-Slave} - Função \emph{Sphere}}
 \end{figure}
-
 
 \begin{figure}[hp]
   \centering
@@ -343,6 +348,10 @@ Os resultados podem ser analisados olhando os gráficos das 10 execuções dos G
 
 \section{Conclusão} % (fold)
 \label{sec:conclusao}
+
+Com os experimento, pudemos observar que o paralelismo sempre traz ganhos em tempo de execução, pra qualquer uma das abordagens. Entretanto, para problemas simples, como a função \ref{eq:spher} e mesmo a função \ref{eq:step} os ganhos não são suficientemente grandes para justificar a paralelização. Já para problemas mais complexos e com um espaço de busca grande, como a função \ref{eq:rast}, os métodos de paralelização aumentam muito a eficiência do algoritmo, apresentando soluções melhores e em menos tempo. 
+
+A falta de uma plataforma para testes maiores dificulta uma análise profunda dos ganhos quando combinados o GA \emph{muti-demme} e \emph{master-slave}, mas uma análise da diferença entre o GA sequencial e o \emph{master-slave} nos permite afirmar que a abordagem hierárquica consegue encontrar melhores soluções (característica da paralelização \emph{multi-demme}) em e em menos tempo de execução (característica do \emph{master-slave}), quando comparado aos outros métodos aqui apresentados.
 % section conclus_o (end)
 
 
